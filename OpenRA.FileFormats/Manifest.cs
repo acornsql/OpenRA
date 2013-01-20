@@ -57,6 +57,28 @@ namespace OpenRA.FileFormats
 
 			if (yaml.ContainsKey("TileSize"))
 				TileSize = int.Parse(yaml["TileSize"].Value);
+
+			if (yaml.ContainsKey("Languages"))
+			{
+				//Fallback to English if strings are missing
+				yaml = new MiniYaml(null, mods
+				.Select(m => MiniYaml.FromFile(
+				new[] { "mods", m, "l10n", "en", "language.yaml" }.Aggregate(Path.Combine)))
+				.Aggregate(MiniYaml.MergeLiberal)).NodesDict;
+				Rules = YamlList(yaml, "Rules").Concat(Rules).ToArray();
+				// TODO: chrome layout does not merge yet properly with nodes of the same name
+
+				Console.WriteLine("Mod supports translation, loading language: {0}", lang);
+				yaml = new MiniYaml(null, mods
+				.Select(m => MiniYaml.FromFile(
+				new[] { "mods", m, "l10n", lang, "language.yaml" }.Aggregate(Path.Combine)))
+				.Aggregate(MiniYaml.MergeLiberal)).NodesDict;
+				Folders = YamlList(yaml, "Folders").Concat(Folders).ToArray();
+				Packages = YamlList(yaml, "Packages").Concat(Packages).ToArray();
+				Rules = YamlList(yaml, "Rules").Concat(Rules).ToArray();
+				ChromeLayout = YamlList(yaml, "ChromeLayout").Concat(ChromeLayout).ToArray();
+			}
+
 		}
 
 		static string[] YamlList(Dictionary<string, MiniYaml> yaml, string key)
