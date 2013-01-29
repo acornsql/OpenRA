@@ -223,6 +223,21 @@ V18:
 	EditorTilesetFilter:
 		ExcludeTilesets: DESERT
 
+V19:
+	Inherits: ^TechBuilding
+	Selectable:
+		Priority: 0
+	Building:
+		Footprint: x x
+		Dimensions: 1,1
+	Health:
+		HP: 400
+	Armor:
+		Type: Wood
+	-MustBeDestroyed:
+	Tooltip:
+		Name: Oil Pump
+
 BARL:
 	Inherits: ^TechBuilding
 	Selectable:
