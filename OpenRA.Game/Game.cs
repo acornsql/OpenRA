@@ -291,7 +291,7 @@ namespace OpenRA
 			Sound.StopVideo();
 			Sound.Initialize();
 
-			modData = new ModData( mm );
+			modData = new ModData(Settings.Game.Language, mm);
 			Renderer.InitializeFonts(modData.Manifest);
 			modData.LoadInitialAssets();
 

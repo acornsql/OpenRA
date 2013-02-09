@@ -104,6 +104,7 @@ namespace OpenRA.GameRules
 	public class GameSettings
 	{
 		public string[] Mods = { "ra" };
+		public string Language = "en";
 
 		public bool TeamChatToggle = false;
 		public bool ShowShellmap = true;

@@ -8,6 +8,8 @@
  */
 #endregion
 
+using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,11 +27,11 @@ namespace OpenRA.FileFormats
 		public readonly Dictionary<string, Pair<string,int>> Fonts;
 		public readonly int TileSize = 24;
 
-		public Manifest(string[] mods)
+		public Manifest(string lang, string[] mods)
 		{
 			Mods = mods;
 			var yaml = new MiniYaml(null, mods
-				.Select(m => MiniYaml.FromFile("mods/" + m + "/mod.yaml"))
+				.Select(m => MiniYaml.FromFile(new[] { "mods", m, "mod.yaml" }.Aggregate(Path.Combine)))
 				.Aggregate(MiniYaml.MergeLiberal)).NodesDict;
 
 			// Todo: Use fieldloader
