@@ -6,9 +6,7 @@ FACT:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: Construction Yard
 		Icon: mcvicnh
-		Description: Builds structures
 	Building:
 		Power: 15
 		Footprint: xxx xxx
@@ -48,9 +46,7 @@ NUKE:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Power Plant
 		Icon: nukeicnh
-		Description: Generates power
 	ProvidesCustomPrerequisite:
 		Prerequisite: anypower
 	Buildable:
@@ -96,9 +92,7 @@ PROC:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: Tiberium Refinery
 		Icon: procicnh
-		Description: Processes raw Tiberium\ninto useable resources
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: anypower
@@ -138,9 +132,7 @@ SILO:
 	Valued:
 		Cost: 150
 	Tooltip:
-		Name: Tiberium Silo
 		Icon: siloicnh
-		Description: Stores processed Tiberium
 	Buildable:
 		Queue: Defense
 		BuildPaletteOrder: 15
@@ -170,9 +162,7 @@ PYLE:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Barracks
 		Icon: pyleicnh
-		Description: Trains infantry
 	ProvidesCustomPrerequisite:
 		Prerequisite: barracks
 	Buildable:
@@ -209,9 +199,7 @@ HAND:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Hand of Nod
 		Icon: handicnh
-		Description: Trains infantry
 	ProvidesCustomPrerequisite:
 		Prerequisite: barracks
 	Buildable:
@@ -245,9 +233,7 @@ AFLD:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: Airstrip
 		Icon: afldicnh
-		Description: Provides a dropzone\nfor vehicle reinforcements
 	ProvidesCustomPrerequisite:
 		Prerequisite: vehicleproduction
 	Buildable:
@@ -284,9 +270,7 @@ WEAP:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: Weapons Factory
 		Icon: weapicnh
-		Description: Assembly point for\nvehicle reinforcements
 	ProvidesCustomPrerequisite:
 		Prerequisite: vehicleproduction
 	Buildable:
@@ -360,9 +344,7 @@ HQ:
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: Communications Center
 		Icon: hqicnh
-		Description: Provides an overview of the battlefield.\n  Requires power to operate.
 	Buildable:
 		BuildPaletteOrder: 70
 		Prerequisites: proc
@@ -383,21 +365,39 @@ HQ:
 	AirstrikePower:
 		Image: bombicnh
 		ChargeTime: 240
-		Description: Air Strike
-		LongDesc: Deploy an aerial napalm strike.\nBurns buildings and infantry along a line.
 		EndChargeSound: airredy1.aud
 		SelectTargetSound: select1.aud
 		UnitType: a10
 	SupportPowerChargeBar:
+
+NUK2:
+	Inherits: ^Building
+	Valued:
+		Cost: 500
+	Tooltip:
+		Icon:nuk2icnh
+	ProvidesCustomPrerequisite:
+		Prerequisite: anypower
+	Buildable:
+		BuildPaletteOrder: 90
+		Prerequisites: hq
+		Owner: gdi,nod
+	Building:
+		Power: 200
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 650
+	RevealsShroud:
+		Range: 4
+	Bib:
 
 FIX:
 	Inherits: ^Building
 	Valued:
 		Cost: 1200
 	Tooltip:
-		Name: Repair Facility
 		Icon: fixicnh
-		Description: Repairs vehicles and allows the\nconstruction of additional bases.
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: vehicleproduction
@@ -414,7 +414,40 @@ FIX:
 	Reservable:
 	RepairsUnits:
 	RallyPoint:
-	
+
+HPAD:
+	Inherits: ^Building
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Icon:hpadicnh
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: barracks
+		Owner: gdi,nod
+	Building:
+		Power: -10
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 400
+	RevealsShroud:
+		Range: 5
+	Exit@1:
+		SpawnOffset: 0,-6
+	Production:
+		Produces: Aircraft
+	BelowUnits:
+	Reservable:
+	RepairsUnits:
+	RallyPoint:
+	ProductionQueue:
+		Type: Aircraft
+		Group: Aircraft
+		BuildSpeed: .4
+		LowPowerSlowdown: 3
+	ProductionBar:
+
 EYE:
 	RequiresPower:
 	CanPowerDown:
@@ -422,9 +455,7 @@ EYE:
 	Valued:
 		Cost: 1800
 	Tooltip:
-		Name: Advanced Communications Center
 		Icon: eyeicnh
-		Description: Provides access to the Ion Cannon.\n  Requires power to operate.
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: hq
@@ -445,8 +476,6 @@ EYE:
 	IonCannonPower:
 		Image: ionicnh
 		ChargeTime: 180
-		Description: Ion Cannon
-		LongDesc: Initiate an Ion Cannon strike.\nApplies instant damage to a small area.
 		BeginChargeSound: ionchrg1.aud
 		EndChargeSound: ionredy1.aud
 		LaunchSound: ion1.aud
@@ -460,9 +489,7 @@ TMPL:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: Temple of Nod
 		Icon: tmplicnh
-		Description: Place of worship and secret missile silo.\n  Requires power to operate.
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: hq
@@ -479,8 +506,6 @@ TMPL:
 	NukePower:
 		Image: atomicnh
 		ChargeTime: 300
-		Description: Nuclear Strike
-		LongDesc: Launch a tactical nuke.\nApplies heavy damage over a large area.
 		BeginChargeSound: 
 		EndChargeSound: nukavail.aud
 		SelectTargetSound: select1.aud
@@ -488,14 +513,110 @@ TMPL:
 		MissileWeapon: atomic
 	SupportPowerChargeBar:
 
+OBLI:
+	RequiresPower:
+	Inherits: ^Building
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Icon:obliicnh
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 60
+		Prerequisites: tmpl
+		Owner: nod
+	Building:
+		Power: -150
+		Footprint: _ x
+		Dimensions: 1,2
+	-GivesBuildableArea:
+	Health:
+		HP: 400
+	Armor: 
+		Type: Heavy
+	RevealsShroud:
+		Range: 8
+	RenderBuildingCharge:
+		ChargeAudio: obelpowr.aud
+	AttackTurreted:
+		PrimaryWeapon: Laser
+		PrimaryOffset: 0,0,-2,-17
+		FireDelay: 8
+	Turreted:
+		ROT:255
+	AutoTarget:
+	-RenderBuilding:
+	RenderRangeCircle:
+	-EmitInfantryOnSell:
+	RenderDetectionCircle:
+	DetectCloaked:
+		Range: 6
+
+CYCL:
+	Inherits: ^Wall
+	Valued:
+		Cost: 25
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Icon:cyclicnh
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 20
+		Prerequisites: fact
+		Owner: nod
+	Health:
+		HP: 100
+	Armor: 
+		Type: Light
+
+SBAG:
+	Inherits: ^Wall
+	Valued:
+		Cost: 25
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Icon:sbagicnh
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 20
+		Prerequisites: fact
+		Owner: gdi
+	Health:
+		HP: 100
+	Armor: 
+		Type: Light
+
+BRIK:
+	Inherits: ^Wall
+	Valued:
+		Cost: 100
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Icon:brikicnh
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 30
+		Prerequisites: vehicleproduction
+		Owner: gdi,nod
+	Health:
+		HP: 250
+	Armor: 
+		Type: Heavy
+	Wall:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSound: crumble.aud
+
 GUN:
 	Inherits: ^Building
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Turret
 		Icon: gunicnh
-		Description: Anti-Armor base defense.\n  Strong vs Tanks\n  Weak vs Infantry, Aircraft
 	Buildable:
 		Queue: Defense
 		BuildPaletteOrder: 45
@@ -530,9 +651,7 @@ SAM:
 	Valued:
 		Cost: 750
 	Tooltip:
-		Name: SAM Site
 		Icon: samicnh
-		Description: Anti-Air base defense.\n  Strong vs Aircraft\n  Weak vs Infantry, Tanks
 	Buildable:
 		Queue: Defense
 		BuildPaletteOrder: 50
@@ -606,9 +725,7 @@ GTWR:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Guard Tower
 		Icon: gtwricnh
-		Description: Basic defensive structure.\n  Strong vs Infantry\n  Weak vs Tanks, Aircraft
 	Buildable:
 		Queue: Defense
 		BuildPaletteOrder: 40
@@ -641,9 +758,7 @@ ATWR:
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: Advanced Guard Tower
 		Icon: atwricnh
-		Description: Anti-armor defensive structure.\n  Strong vs Light Vehicles, Tanks\n  Weak vs Infantry
 	Buildable:
 		Queue: Defense
 		BuildPaletteOrder: 60
@@ -673,83 +788,9 @@ ATWR:
 		Range: 6
 	RenderRangeCircle:
 
-SBAG:
-	Inherits: ^Wall
-	Valued:
-		Cost: 25
-	CustomSellValue:
-		Value: 0
-	Tooltip:
-		Name: Sandbag Barrier
-		Icon:sbagicnh
-		Description: Stops infantry and blocks enemy fire.\nCan be crushed by tanks.
-	Buildable:
-		Queue: Defense
-		BuildPaletteOrder: 20
-		Prerequisites: fact
-		Owner: gdi
-	Health:
-		HP: 100
-	Armor: 
-		Type: Light
-
-CYCL:
-	Inherits: ^Wall
-	Valued:
-		Cost: 25
-	CustomSellValue:
-		Value: 0
-	Tooltip:
-		Name: Chain Link Barrier
-		Icon:cyclicnh
-		Description: Stops infantry and blocks enemy fire.\nCan be crushed by tanks.
-	Buildable:
-		Queue: Defense
-		BuildPaletteOrder: 20
-		Prerequisites: fact
-		Owner: nod
-	Health:
-		HP: 100
-	Armor: 
-		Type: Light
-
-BRIK:
-	Inherits: ^Wall
-	Valued:
-		Cost: 100
-	CustomSellValue:
-		Value: 0
-	Tooltip:
-		Name: Concrete Barrier
-		Icon:brikicnh
-		Description: Stop units and blocks enemy fire.
-	Buildable:
-		Queue: Defense
-		BuildPaletteOrder: 30
-		Prerequisites: vehicleproduction
-		Owner: gdi,nod
-	Health:
-		HP: 250
-	Armor: 
-		Type: Heavy
-	Wall:
-		CrushClasses: heavywall
-		-CrushSound:
-	SoundOnDamageTransition:
-		DestroyedSound: crumble.aud
-
 # custom prerequisites:
 BARRACKS:
-	Tooltip:
-		Name: Infantry Production
-		Description: Infantry Production
 
 VEHICLEPRODUCTION:
-	Tooltip:
-		Name: Vehicle Production
-		Description: Vehicle Production
 
 ANYPOWER:
-	Tooltip:
-		Name: Power Plant
-		Description: Power Plant
