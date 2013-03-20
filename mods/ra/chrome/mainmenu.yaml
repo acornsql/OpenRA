@@ -12,6 +12,8 @@ Background@MAINMENU_BG:
 			Width:250
 			Height:25
 			Text:OpenRA Main Menu
+			Translation:
+				German: OpenRA Hauptmenü
 			Align:Center
 			Font:Bold
 		Button@MAINMENU_BUTTON_JOIN:

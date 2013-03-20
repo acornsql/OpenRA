@@ -114,6 +114,8 @@ namespace OpenRA.GameRules
 
 		public bool UseClassicMouseStyle = false;
 
+		public string Language = "English";
+
 		// Internal game settings
 		public int Timestep = 40;
 

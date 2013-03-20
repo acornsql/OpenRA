@@ -61,6 +61,10 @@ namespace OpenRA.Widgets
 			if (text == null)
 				return;
 
+			if (Children.Contains(TranslationWidget))
+				if (Game.Settings.Game.Language != "English")
+					text = "Translation Test";
+				
 			int2 textSize = font.Measure(text);
 			int2 position = RenderOrigin;
 
