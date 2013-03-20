@@ -54,30 +54,16 @@ namespace OpenRA.Mods.RA.AI
 
 		static object LoadActorList(MiniYaml y, string field)
 		{
-			return LoadList<float>(y, field);
-		}
-
-		static object LoadListList(MiniYaml y, string field)
-		{
-			return LoadList<string[]>(y,field);
-		}
-
-		static object LoadList<ValueType>(MiniYaml y, string field)
-		{
-			return y.NodesDict.ContainsKey(field)
-				? y.NodesDict[field].NodesDict.ToDictionary(
-					a => a.Key,
-					a => FieldLoader.GetValue<ValueType>(field, a.Value.Value))
-				: new Dictionary<string, ValueType>();
+			return FieldLoader.LoadDict<float>(y, field);
 		}
 
 		static object LoadUnits(MiniYaml y) { return LoadActorList(y, "UnitsToBuild"); }
 		static object LoadBuildings(MiniYaml y) { return LoadActorList(y, "BuildingFractions"); }
 
-		static object LoadUnitsCommonNames(MiniYaml y) { return LoadListList(y, "UnitsCommonNames"); }
-		static object LoadBuildingsCommonNames(MiniYaml y) { return LoadListList(y, "BuildingCommonNames"); }
+		static object LoadUnitsCommonNames(MiniYaml y) { return FieldLoader.LoadDictDict(y, "UnitsCommonNames"); }
+		static object LoadBuildingsCommonNames(MiniYaml y) { return FieldLoader.LoadDictDict(y, "BuildingCommonNames"); }
 
-		static object LoadBuildingLimits(MiniYaml y) { return LoadList<int>(y, "BuildingLimits"); }
+		static object LoadBuildingLimits(MiniYaml y) { return FieldLoader.LoadDict<int>(y, "BuildingLimits"); }
 
 		public object Create(ActorInitializer init) { return new HackyAI(this); }
 	}

@@ -95,6 +95,20 @@ namespace OpenRA.FileFormats
 			UnknownFieldAction( key.Trim(), self.GetType() );
 		}
 
+		public static object LoadDictDict(MiniYaml y, string field)
+		{
+			return LoadDict<string[]>(y,field);
+		}
+		
+		public static object LoadDict<ValueType>(MiniYaml y, string field)
+		{
+			return y.NodesDict.ContainsKey(field)
+				? y.NodesDict[field].NodesDict.ToDictionary(
+					a => a.Key,
+					a => FieldLoader.GetValue<ValueType>(field, a.Value.Value))
+					: new Dictionary<string, ValueType>();
+		}
+
 		public static T GetValue<T>( string field, string value )
 		{
 			return (T) GetValue( field, typeof(T), value );
