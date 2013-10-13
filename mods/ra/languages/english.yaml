@@ -4,3 +4,4 @@ english:
 	ready: READY
 	on-hold: ON HOLD
 	requires: Requires {0}
+	dog: Attack Dog

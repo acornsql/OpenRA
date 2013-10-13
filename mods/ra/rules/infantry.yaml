@@ -9,7 +9,7 @@ DOG:
 	Valued:
 		Cost: 200
 	Tooltip:
-		Name: Attack Dog
+		Name: @dog@
 		Description: Anti-infantry unit. Not fooled by the \nSpy's disguise.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Selectable:
 		Voice: DogVoice
