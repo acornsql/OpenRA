@@ -14,6 +14,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace OpenRA.FileFormats
 {
@@ -72,6 +73,13 @@ namespace OpenRA.FileFormats
 			return t;
 		}
 
+		static string ExpandValue(string value)
+		{
+			if (string.IsNullOrEmpty(value))
+				return value;
+			return Regex.Replace(value, "@[^@]+@", m => Translate(m.Value.Substring(1, m.Value.Length - 2)), RegexOptions.Compiled);
+		}
+
 		static readonly object[] NoIndexes = { };
 		public static void LoadField(object self, string key, string value)
 		{
@@ -79,8 +87,16 @@ namespace OpenRA.FileFormats
 
 			if (field != null)
 			{
-				if (!field.HasAttribute<FieldFromYamlKeyAttribute>())
-					field.SetValue(self, GetValue(field.Name, field.FieldType, value));
+				if (field.HasAttribute<FieldFromYamlKeyAttribute>())
+					return;
+
+				if (field.FieldType == typeof(string) && field.HasAttribute<TranslateAttribute>())
+				{
+					field.SetValue(self, ExpandValue(value));
+					return;
+				}
+
+				field.SetValue(self, GetValue(field.Name, field.FieldType, value));
 				return;
 			}
 
@@ -88,8 +104,16 @@ namespace OpenRA.FileFormats
 
 			if (prop != null)
 			{
-				if (!prop.HasAttribute<FieldFromYamlKeyAttribute>())
-					prop.SetValue(self, GetValue(prop.Name, prop.PropertyType, value), NoIndexes);
+				if (prop.HasAttribute<FieldFromYamlKeyAttribute>())
+					return;
+
+				if (prop.PropertyType == typeof(string) && prop.HasAttribute<TranslateAttribute>())
+				{
+					prop.SetValue(self, ExpandValue(value), NoIndexes);
+					return;
+				}
+
+				prop.SetValue(self, GetValue(prop.Name, prop.PropertyType, value), NoIndexes);
 				return;
 			}
 
@@ -342,7 +366,24 @@ namespace OpenRA.FileFormats
 				return loaderFuncCache;
 			}
 		}
+
+		public static string Translate(string key)
+		{
+			if (Translations == null || string.IsNullOrEmpty(key))
+				return key;
+
+			string value;
+			if (!Translations.TryGetValue(key, out value))
+				return key;
+
+			return value;
+		}
+
+		public static Dictionary<string, string> Translations = new Dictionary<string, string>();
 	}
+
+	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
+	public class TranslateAttribute : Attribute { }
 
 	public class FieldFromYamlKeyAttribute : Attribute { }
 
