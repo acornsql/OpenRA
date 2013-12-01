@@ -1,0 +1,233 @@
+Palettes:
+	mouse: ibm.pal
+
+Cursors:
+	mouse.shp: mouse
+		scroll-t:
+			start:1
+			x: -10
+			y: -10
+		scroll-tr:
+			start: 2
+			x: -10
+			y: -10
+		scroll-r:
+			start: 2
+			x: -10
+			y: -10
+		scroll-br:
+			start: 2
+			x: -10
+			y: -10
+		scroll-b:
+			start: 3
+			x: -10
+			y: -10
+		scroll-bl:
+			start: 4
+			x: -10
+			y: -10
+		scroll-l:
+			start: 4
+			x: -10
+			y: -10
+		scroll-tl:
+			start: 4
+			x: -10
+			y: -10
+		scroll-t-blocked:
+			start:1
+			x: -10
+			y: -10
+		scroll-tr-blocked:
+			start: 2
+			x: -10
+			y: -10
+		scroll-r-blocked:
+			start: 2
+			x: -10
+			y: -10
+		scroll-br-blocked:
+			start: 2
+			x: -10
+			y: -10
+		scroll-b-blocked:
+			start: 3
+			x: -10
+			y: -10
+		scroll-bl-blocked:
+			start: 4
+			x: -10
+			y: -10
+		scroll-l-blocked:
+			start: 4
+			x: -10
+			y: -10
+		scroll-tl-blocked:
+			start: 4
+			x: -10
+			y: -10
+		select:
+			start: 6
+			x: -10
+			y: -10
+		default:
+			start: 0
+			x: -10
+			y: -10
+		default-minimap:
+			start: 0
+			x: -10
+			y: -10
+		generic-blocked:
+			start: 6
+			x: -10
+			y: -10
+		generic-blocked-minimap:
+			start: 6
+			x: -10
+			y: -10
+		move:
+			start: 5
+			x: -10
+			y: -10
+		move-minimap:
+			start: 5
+			x: -10
+			y: -10
+		move-blocked:
+			start: 5
+			x: -10
+			y: -10
+		move-blocked-minimap:
+			start: 5
+			x: -10
+			y: -10
+		attack:
+			start: 6
+			x: -10
+			y: -10
+		attack-minimap:
+			start: 6
+			x: -10
+			y: -10
+		attackoutsiderange:
+			start: 6
+			x: -10
+			y: -10
+		attackoutsiderange-minimap:
+			start: 6
+			x: -10
+			y: -10
+		attackmove:
+			start: 6
+			x: -10
+			y: -10
+		attackmove-minimap:
+			start: 6
+			x: -10
+			y: -10
+		harvest:
+			start: 6
+			x: -10
+			y: -10
+		harvest-minimap:
+			start: 6
+			x: -10
+			y: -10
+		enter:
+			start: 5
+			x: -10
+			y: -10
+		enter-minimap:
+			start: 5
+			x: -10
+			y: -10
+		enter-blocked:
+			start: 5
+			x: -10
+			y: -10
+		enter-blocked-minimap:
+			start: 5
+			x: -10
+			y: -10
+		c4:
+			start: 5
+			x: -10
+			y: -10
+		c4-minimap:
+			start: 5
+			x: -10
+			y: -10
+		guard:
+			start: 5
+			x: -10
+			y: -10
+		guard-minimap:
+			start: 5
+			x: -10
+			y: -10
+		capture:
+			start: 5
+			x: -10
+			y: -10
+		capture-minimap:
+			start: 5
+			x: -10
+			y: -10
+		ability:
+			start: 5
+			x: -10
+			y: -10
+		ability-minimap:
+			start: 5
+			x: -10
+			y: -10
+		deploy:
+			start: 5
+			x: -10
+			y: -10
+		deploy-blocked:
+			start: 5
+			x: -10
+			y: -10
+		nuke:
+			start: 5
+			x: -10
+			y: -10
+		sell:
+			start: 5
+			x: -10
+			y: -10
+		sell-blocked:
+			start: 5
+			x: -10
+			y: -10
+		repair:
+			start: 5
+			x: -10
+			y: -10
+		repair-blocked:
+			start: 5
+			x: -10
+			y: -10
+		goldwrench:
+			start: 5
+			x: -10
+			y: -10
+		goldwrench-blocked:
+			start: 5
+			x: -10
+			y: -10
+		move-rough:
+			start: 5
+			x: -10
+			y: -10
+		powerdown-blocked:
+			start:0
+			x: 12
+			y: 12
+		powerdown:
+			start:0
+			x: 12
+			y: 12
