@@ -140,6 +140,22 @@ namespace OpenRA.Utility
 			Console.WriteLine("Saved {0}-[0..{1}].png", prefix, count - 1);
 		}
 
+		[Desc("MOD FILE FRAME", "Print binary position for a given sprite frame.")]
+		public static void GetPosition(string[] args)
+		{
+			var mod = args[1];
+			var file = args[2];
+			var frame = int.Parse(args[3]);
+
+			var manifest = new Manifest(mod);
+			FileSystem.LoadFromManifest(manifest);
+
+			var stream = FileSystem.Open(file);
+			var filename = Path.GetFileName(file);
+			var sprite = SpriteSource.LoadSpriteSource(stream, filename).Frames.Skip(frame).First();
+			Console.WriteLine("Frame {0} in file {1} starts at {2} and ends at {3}".F(frame, file, sprite.StartPosition, sprite.EndPosition));
+		}
+
 		[Desc("MOD FILES", "Extract files from mod packages to the current directory")]
 		public static void ExtractFiles(string[] args)
 		{

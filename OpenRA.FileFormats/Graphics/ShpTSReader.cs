@@ -21,12 +21,16 @@ namespace OpenRA.FileFormats
 		public Size FrameSize { get; private set; }
 		public float2 Offset { get; private set; }
 		public byte[] Data { get; set; }
+		public long StartPosition { get; set; }
+		public long EndPosition { get; set; }
 
 		public readonly uint FileOffset;
 		public readonly byte Format;
 
 		public FrameHeader(Stream stream, Size frameSize)
 		{
+			StartPosition = stream.Position;
+
 			var x = stream.ReadUInt16();
 			var y = stream.ReadUInt16();
 			var width = stream.ReadUInt16();

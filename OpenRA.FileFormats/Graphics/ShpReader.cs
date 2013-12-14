@@ -23,6 +23,8 @@ namespace OpenRA.FileFormats
 		public Size FrameSize { get { return reader.Size; } }
 		public float2 Offset { get { return float2.Zero; } }
 		public byte[] Data { get; set; }
+		public long StartPosition { get; set; }
+		public long EndPosition { get; set; }
 
 		public uint FileOffset;
 		public Format Format;
@@ -37,6 +39,7 @@ namespace OpenRA.FileFormats
 
 		public ImageHeader(Stream stream, ShpReader reader)
 		{
+			StartPosition = stream.Position;
 			this.reader = reader;
 			var data = stream.ReadUInt32();
 			FileOffset = data & 0xffffff;

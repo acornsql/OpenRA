@@ -26,6 +26,7 @@ namespace OpenRA.Utility
 			{ "--extract", Command.ExtractFiles },
 			{ "--remap", Command.RemapShp },
 			{ "--transpose", Command.TransposeShp },
+			{ "--position", Command.GetPosition },
 			{ "--docs", Command.ExtractTraitDocs },
 			{ "--map-hash", Command.GetMapHash },
 			{ "--map-preview", Command.GenerateMinimap },

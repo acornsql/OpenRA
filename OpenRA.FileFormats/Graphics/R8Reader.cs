@@ -22,9 +22,12 @@ namespace OpenRA.FileFormats
 		public Size FrameSize { get; private set; }
 		public float2 Offset { get; private set; }
 		public byte[] Data { get; set; }
+		public long StartPosition { get; set; }
+		public long EndPosition { get; set; }
 
 		public R8Image(Stream s)
 		{
+			StartPosition = s.Position;
 			// Scan forward until we find some data
 			var type = s.ReadUInt8();
 			while (type == 0)
@@ -56,6 +59,8 @@ namespace OpenRA.FileFormats
 			// Ignore palette
 			if (type == 1 && paletteOffset != 0)
 				s.Seek(520, SeekOrigin.Current);
+
+			EndPosition = s.Position;
 		}
 	}
 

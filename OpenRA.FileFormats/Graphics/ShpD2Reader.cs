@@ -30,9 +30,12 @@ namespace OpenRA.FileFormats
 		public Size FrameSize { get { return Size; } }
 		public float2 Offset { get { return float2.Zero; } }
 		public byte[] Data { get; set; }
+		public long StartPosition { get; set; }
+		public long EndPosition { get; set; }
 
 		public Frame(Stream s)
 		{
+			StartPosition = s.Position;
 			var flags = (FormatFlags)s.ReadUInt16();
 			s.Position += 1;
 			var width = s.ReadUInt16();

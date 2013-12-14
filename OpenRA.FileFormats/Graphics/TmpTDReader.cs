@@ -21,6 +21,8 @@ namespace OpenRA.FileFormats
 		public Size FrameSize { get; private set; }
 		public float2 Offset { get { return float2.Zero; } }
 		public byte[] Data { get; set; }
+		public long StartPosition { get; set; }
+		public long EndPosition { get; set; }
 
 		public TmpTile(byte[] data, Size size)
 		{

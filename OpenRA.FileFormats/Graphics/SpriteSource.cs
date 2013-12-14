@@ -21,6 +21,8 @@ namespace OpenRA.FileFormats
 		Size FrameSize { get; }
 		float2 Offset { get; }
 		byte[] Data { get; }
+		long StartPosition { get; }
+		long EndPosition { get; }
 	}
 
 	public interface ISpriteSource
