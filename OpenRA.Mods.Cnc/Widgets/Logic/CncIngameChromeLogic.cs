@@ -78,6 +78,8 @@ namespace OpenRA.Mods.Cnc.Widgets.Logic
 		{
 			var observerWidgets = Game.LoadWidget(world, "OBSERVER_WIDGETS", playerRoot, new WidgetArgs());
 			observerWidgets.Get<ButtonWidget>("OPTIONS_BUTTON").OnClick = OptionsClicked;
+
+			Game.LoadWidget(world, "OBSERVER_STATS", observerWidgets, new WidgetArgs());
 		}
 
 		public void InitPlayerWidgets(World world, Widget playerRoot)

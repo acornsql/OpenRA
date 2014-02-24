@@ -86,6 +86,7 @@ ChromeLayout:
 	mods/cnc/chrome/ingame.yaml
 	mods/cnc/chrome/ingame-chat.yaml
 	mods/cnc/chrome/ingamemenu.yaml
+	mods/cnc/chrome/ingame-observerstats.yaml
 	mods/cnc/chrome/music.yaml
 	mods/cnc/chrome/modchooser.yaml
 	mods/cnc/chrome/settings.yaml
