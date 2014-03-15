@@ -156,9 +156,10 @@ namespace OpenRA.Widgets
 			{
 				CursorPosition--;
 				Text = Text.Remove(CursorPosition, 1);
+				return true;
 			}
 
-			return true;
+			return false;
 		}
 
 		public override bool HandleTextInput(string text)
