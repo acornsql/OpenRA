@@ -3,6 +3,11 @@ Container@INGAME_ROOT:
 	Children:
 		LogicTicker@DISCONNECT_WATCHER:
 			Logic:DisconnectWatcherLogic
+		MouseWheelZoom@MOUSE_ZOOM:
+			X:0
+			Y:0
+			Width:WINDOW_RIGHT
+			Height:WINDOW_BOTTOM
 		WorldInteractionController@INTERACTION_CONTROLLER:
 			X:0
 			Y:0
