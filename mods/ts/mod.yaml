@@ -162,6 +162,8 @@ ContentInstaller:
 	PackageToExtractFromCD:
 	ExtractFilesFromCD:
 	CopyFilesFromCD: install/tibsun.mix, scores.mix, multi.mix
+	ShippedSoundtracks: 2
+	MusicPackageMirrorList:
 
 ServerTraits:
 	LobbyCommands

@@ -526,6 +526,7 @@
     <Compile Include="Console\HelpCommand.cs" />
     <Compile Include="Console\PlayerCommands.cs" />
     <Compile Include="Widgets\Logic\InstallFromCDLogic.cs" />
+    <Compile Include="Widgets\Logic\InstallMusicLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenRA.Game\OpenRA.Game.csproj">
