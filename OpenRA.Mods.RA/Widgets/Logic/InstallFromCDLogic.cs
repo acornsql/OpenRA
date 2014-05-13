@@ -1,6 +1,6 @@
-﻿#region Copyright & License Information
+#region Copyright & License Information
 /*
- * Copyright 2007-2011 The OpenRA Developers (see AUTHORS)
+ * Copyright 2007-2014 The OpenRA Developers (see AUTHORS)
  * This file is part of OpenRA, which is free software. It is made
  * available to you under the terms of the GNU General Public License
  * as published by the Free Software Foundation. For more information,
@@ -15,9 +15,9 @@ using System.Threading;
 using OpenRA.FileFormats;
 using OpenRA.Widgets;
 
-namespace OpenRA.Mods.TS.Widgets.Logic
+namespace OpenRA.Mods.RA.Widgets.Logic
 {
-	public class TSInstallFromCDLogic
+	public class InstallFromCDLogic
 	{
 		Widget panel;
 		ProgressBarWidget progressBar;
@@ -27,7 +27,7 @@ namespace OpenRA.Mods.TS.Widgets.Logic
 		Widget installingContainer, insertDiskContainer;
 
 		[ObjectCreator.UseCtor]
-		public TSInstallFromCDLogic(Widget widget, Action continueLoading)
+		public InstallFromCDLogic(Widget widget, Action continueLoading)
 		{
 			this.continueLoading = continueLoading;
 			panel = widget.Get("INSTALL_FROMCD_PANEL");
@@ -45,12 +45,15 @@ namespace OpenRA.Mods.TS.Widgets.Logic
 			CheckForDisk();
 		}
 
+		bool IsValidDisk(string diskRoot)
+		{
+			var files = Game.modData.Manifest.ContentInstaller["DiskTestFiles"].Split(',');
+			return files.All(f => File.Exists(Path.Combine(diskRoot, f)));
+		}
+
 		void CheckForDisk()
 		{
-			Func<string, bool> ValidDiskFilter = diskRoot => File.Exists(diskRoot+Path.DirectorySeparatorChar+"multi.mix") &&
-					File.Exists(new string[] { diskRoot, "install", "tibsun.mix" }.Aggregate(Path.Combine));
-
-			var path = InstallUtils.GetMountedDisk(ValidDiskFilter);
+			var path = InstallUtils.GetMountedDisk(IsValidDisk);
 
 			if (path != null)
 				Install(path);
@@ -68,14 +71,17 @@ namespace OpenRA.Mods.TS.Widgets.Logic
 			insertDiskContainer.IsVisible = () => false;
 			installingContainer.IsVisible = () => true;
 
-			var dest = new string[] { Platform.SupportDir, "Content", "ts" }.Aggregate(Path.Combine);
-			var copyFiles = new string[] { "install/tibsun.mix", "scores.mix", "multi.mix"};
+			var dest = new string[] { Platform.SupportDir, "Content", Game.modData.Manifest.Mod.Id }.Aggregate(Path.Combine);
+			var copyFiles = Game.modData.Manifest.ContentInstaller["CopyFilesFromCD"].Split(',');
+
+			var extractPackage = Game.modData.Manifest.ContentInstaller["PackageToExtractFromCD"];
+			var extractFiles = Game.modData.Manifest.ContentInstaller["ExtractFilesFromCD"].Split(',');
 
 			var installCounter = 0;
-			var installTotal = copyFiles.Count();
+			var installTotal = copyFiles.Count() + extractFiles.Count();
 			var onProgress = (Action<string>)(s => Game.RunAfterTick(() =>
 			{
-				progressBar.Percentage = installCounter*100/installTotal;
+				progressBar.Percentage = installCounter * 100 / installTotal;
 				installCounter++;
 
 				statusLabel.GetText = () => s;
@@ -95,8 +101,13 @@ namespace OpenRA.Mods.TS.Widgets.Logic
 					if (!InstallUtils.CopyFiles(source, copyFiles, dest, onProgress, onError))
 						return;
 
+					if (!string.IsNullOrEmpty(extractPackage))
+						if (!InstallUtils.ExtractFromPackage(source, extractPackage, extractFiles, dest, onProgress, onError))
+							return;
+
 					Game.RunAfterTick(() =>
 					{
+						statusLabel.GetText = () => "Game assets have been extracted.";
 						Ui.CloseWindow();
 						continueLoading();
 					});
@@ -110,4 +121,3 @@ namespace OpenRA.Mods.TS.Widgets.Logic
 		}
 	}
 }
-

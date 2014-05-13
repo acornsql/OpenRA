@@ -140,15 +140,6 @@ mod_d2k_LIBS = $(COMMON_LIBS) $(STD_MOD_LIBS) $(mod_ra_TARGET)
 PROGRAMS += mod_d2k
 mod_d2k: $(mod_d2k_TARGET)
 
-# Tiberian Sun
-mod_ts_SRCS := $(shell find OpenRA.Mods.TS/ -iname '*.cs')
-mod_ts_TARGET = mods/ts/OpenRA.Mods.TS.dll
-mod_ts_KIND = library
-mod_ts_DEPS = $(STD_MOD_DEPS) $(mod_ra_TARGET)
-mod_ts_LIBS = $(COMMON_LIBS) $(STD_MOD_LIBS) $(mod_ra_TARGET)
-PROGRAMS += mod_ts
-mod_ts: $(mod_ts_TARGET)
-
 ##### Tools #####
 
 # Map Editor
@@ -259,7 +250,7 @@ tools: editor tsbuild crashdialog
 
 package: dependencies core editor crashdialog docs version
 
-mods: mod_ra mod_cnc mod_d2k mod_ts
+mods: mod_ra mod_cnc mod_d2k
 
 all: dependencies core tools
 

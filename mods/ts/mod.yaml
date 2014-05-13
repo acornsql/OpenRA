@@ -93,7 +93,6 @@ Assemblies:
 	mods/d2k/OpenRA.Mods.D2k.dll
 	mods/ra/OpenRA.Mods.RA.dll
 	mods/cnc/OpenRA.Mods.Cnc.dll
-	mods/ts/OpenRA.Mods.TS.dll
 
 ChromeLayout:
 	mods/ts/chrome/gameinit.yaml
@@ -159,6 +158,10 @@ ContentInstaller:
 	InstallerMenuWidget: INSTALL_PANEL
 	TestFiles: cache.mix, conquer.mix, isosnow.mix, isotemp.mix, local.mix, sidec01.mix, sidec02.mix, sno.mix, snow.mix, sounds.mix, speech01.mix, tem.mix, temperat.mix
 	PackageMirrorList: http://open-ra.org/packages/ts-mirrors.txt
+	DiskTestFiles: multi.mix, install/tibsun.mix
+	PackageToExtractFromCD:
+	ExtractFilesFromCD:
+	CopyFilesFromCD: install/tibsun.mix, scores.mix, multi.mix
 
 ServerTraits:
 	LobbyCommands
