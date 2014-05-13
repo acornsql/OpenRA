@@ -30,15 +30,6 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 			panel.Get<ButtonWidget>("DOWNLOAD_BUTTON").OnClick = () =>
 				Ui.OpenWindow("INSTALL_DOWNLOAD_PANEL", args);
 
-			if (installData.ContainsKey("FilesToCopy") && !string.IsNullOrEmpty(installData["FilesToCopy"]) &&
-				installData.ContainsKey("FilesToExtract") && !string.IsNullOrEmpty(installData["FilesToExtract"]))
-			{
-				args = new WidgetArgs(args)
-				{
-					{ "filesToCopy", installData["FilesToCopy"].Split(',') },
-					{ "filesToExtract", installData["FilesToExtract"].Split(',') },
-				};
-			}
 			panel.Get<ButtonWidget>("INSTALL_BUTTON").OnClick = () =>
 				Ui.OpenWindow("INSTALL_FROMCD_PANEL", args);
 

@@ -29,6 +29,7 @@ namespace OpenRA
 		public readonly Dictionary<string, string> Packages;
 		public readonly MiniYaml LoadScreen;
 		public readonly MiniYaml LobbyDefaults;
+		public readonly Dictionary<string, string> ContentInstaller;
 		public readonly Dictionary<string, Pair<string, int>> Fonts;
 		public readonly Size TileSize = new Size(24, 24);
 		public readonly string NewsUrl;
@@ -67,6 +68,7 @@ namespace OpenRA
 
 			LoadScreen = yaml["LoadScreen"];
 			LobbyDefaults = yaml["LobbyDefaults"];
+			ContentInstaller = yaml["ContentInstaller"].NodesDict.ToDictionary(x => x.Key, x => x.Value.Value);
 			Fonts = yaml["Fonts"].NodesDict.ToDictionary(x => x.Key,
 				x => Pair.New(x.Value.NodesDict["Font"].Value,
 					Exts.ParseIntegerInvariant(x.Value.NodesDict["Size"].Value)));
