@@ -134,10 +134,10 @@ ContentInstaller:
 	InstallerBackgroundWidget: INSTALL_BACKGROUND
 	InstallerMenuWidget: INSTALL_PANEL
 	PackageMirrorList: http://open-ra.org/packages/cnc-mirrors.txt
-	DiskTestFiles: CONQUER.MIX, DESERT.MIX INSTALL/SETUP.Z
-	PackageToExtractFromCD: INSTALL/SETUP.Z
+	DiskTestFiles: conquer.mix, desert.mix, install/setup.z
+	PackageToExtractFromCD: install/setup.z
 	ExtractFilesFromCD: speech.mix, tempicnh.mix, transit.mix
-	CopyFilesFromCD: CONQUER.MIX, DESERT.MIX, SCORES.MIX, SOUNDS.MIX, TEMPERAT.MIX, WINTER.MIX
+	CopyFilesFromCD: conquer.mix, desert.mix, general.mix, scores.mix, sounds.mix, temperat.mix, winter.mix
 	ShippedSoundtracks: 2
 	MusicPackageMirrorList: http://open-ra.org/packages/cnc-music-mirrors.txt
 
