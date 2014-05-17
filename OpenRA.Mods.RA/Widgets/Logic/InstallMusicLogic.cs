@@ -21,10 +21,13 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 	{
 		ButtonWidget installButton;
 		Dictionary<string, string> installData;
+		Ruleset modRules;
 
 		[ObjectCreator.UseCtor]
-		public InstallMusicLogic(Widget widget)
+		public InstallMusicLogic(Widget widget, Ruleset modRules)
 		{
+			this.modRules = modRules;
+
 			installData = Game.modData.Manifest.ContentInstaller;
 
 			installButton = widget.GetOrNull<ButtonWidget>("INSTALL_BUTTON");
@@ -32,10 +35,11 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 			{
 				installButton.OnClick = () => LoadInstallMusicContainer();
 				installButton.IsVisible = () =>
-					Rules.InstalledMusic.ToArray().Length <= Exts.ParseIntegerInvariant(installData["ShippedSoundtracks"]);
+					modRules.InstalledMusic.ToArray().Length <= Exts.ParseIntegerInvariant(installData["ShippedSoundtracks"]);
 			}
 		}
 
+		bool previousShowShellSetting;
 		void LoadInstallMusicContainer()
 		{
 			var installMusicContainer = Ui.OpenWindow("INSTALL_MUSIC_PANEL", new WidgetArgs());
@@ -45,10 +49,11 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 				try
 				{
 					GlobalFileSystem.LoadFromManifest(Game.modData.Manifest);
-					Rules.Music.Do(m => m.Value.Reload());
+					modRules.Music.Do(m => m.Value.Reload());
 					var musicPlayerLogic = (MusicPlayerLogic)installButton.Parent.LogicObject;
 					musicPlayerLogic.BuildMusicTable();
 					Ui.CloseWindow();
+					Game.Settings.Game.ShowShellmap = previousShowShellSetting;
 				}
 				catch (Exception e)
 				{
@@ -58,14 +63,26 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 
 			var cancelButton = installMusicContainer.GetOrNull<ButtonWidget>("CANCEL_BUTTON");
 			if (cancelButton != null)
-				cancelButton.OnClick = () => Ui.CloseWindow();
+			{
+				cancelButton.OnClick = () =>
+				{
+					Game.Settings.Game.ShowShellmap = previousShowShellSetting;
+					Ui.CloseWindow();
+				};
+			}
 
 			var ripFromDiscButton = installMusicContainer.GetOrNull<ButtonWidget>("RIP_FROM_CD_BUTTON");
 			if (ripFromDiscButton != null)
 			{
-				ripFromDiscButton.OnClick = () => Ui.OpenWindow("INSTALL_FROMCD_PANEL", new WidgetArgs() {
-					{ "continueLoading", after },
-				});
+				ripFromDiscButton.OnClick = () =>
+				{
+					previousShowShellSetting = Game.Settings.Game.ShowShellmap;
+					Game.Settings.Game.ShowShellmap = false;
+					GlobalFileSystem.UnmountAll();
+					Ui.OpenWindow("INSTALL_FROMCD_PANEL", new WidgetArgs() {
+						{ "continueLoading", after },
+					});
+				};
 			}
 
 			var downloadButton = installMusicContainer.GetOrNull<ButtonWidget>("DOWNLOAD_BUTTON");
@@ -74,10 +91,16 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 				downloadButton.IsVisible = () => !string.IsNullOrEmpty(installData["MusicPackageMirrorList"]);
 				var musicInstallData = new Dictionary<string, string> { };
 				musicInstallData["PackageMirrorList"] =  installData["MusicPackageMirrorList"];
-				downloadButton.OnClick = () => Ui.OpenWindow("INSTALL_DOWNLOAD_PANEL", new WidgetArgs() {
-					{ "afterInstall", after },
-					{ "installData", musicInstallData },
-				});
+				downloadButton.OnClick = () =>
+				{
+					previousShowShellSetting = Game.Settings.Game.ShowShellmap;
+					Game.Settings.Game.ShowShellmap = false;
+					GlobalFileSystem.UnmountAll();
+					Ui.OpenWindow("INSTALL_DOWNLOAD_PANEL", new WidgetArgs() {
+						{ "afterInstall", after },
+						{ "installData", musicInstallData },
+					});
+				};
 			}
 		}
 	}
