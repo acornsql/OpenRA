@@ -361,13 +361,13 @@ namespace OpenRA
 			foreach (var mod in ModMetadata.AllMods)
 				Console.WriteLine("\t{0}: {1} ({2})", mod.Key, mod.Value.Title, mod.Value.Version);
 
-			InitializeWithMod(Settings.Game.Mod, args.GetValue("Launch.Replay", null));
+			InitializeWithMod(args);
 
 			if (Settings.Server.DiscoverNatDevices)
 				RunAfterDelay(Settings.Server.NatDiscoveryTimeout, UPnP.TryStoppingNatDiscovery);
 		}
 
-		public static void InitializeWithMod(string mod, string replay)
+		public static void InitializeWithMod(Arguments args)
 		{
 			// Clear static state if we have switched mods
 			LobbyInfoChanged = () => { };
@@ -382,6 +382,7 @@ namespace OpenRA
 			if (orderManager != null)
 				orderManager.Dispose();
 
+			var mod = args.GetValue("Game.Mod", Settings.Game.Mod);
 			// Fall back to default if the mod doesn't exist
 			if (!ModMetadata.AllMods.ContainsKey(mod))
 				mod = new GameSettings().Mod;
@@ -439,10 +440,17 @@ namespace OpenRA
 			}
 			else
 			{
-				modData.LoadScreen.StartGame();
-				Settings.Save();
-				if (!string.IsNullOrEmpty(replay))
-					Game.JoinReplay(replay);
+				var window = args.GetValue("Launch.Window", null);
+				if (!string.IsNullOrEmpty(window))
+					Widgets.Ui.OpenWindow(window, new WidgetArgs());
+				else
+				{
+					modData.LoadScreen.StartGame();
+					Settings.Save();
+					var replay = args.GetValue("Launch.Replay", null);
+					if (!string.IsNullOrEmpty(replay))
+						Game.JoinReplay(replay);
+				}
 			}
 		}
 

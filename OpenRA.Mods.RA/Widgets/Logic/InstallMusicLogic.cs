@@ -19,46 +19,15 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 {
 	public class InstallMusicLogic
 	{
-		ButtonWidget installButton;
-		Dictionary<string, string> installData;
-		Ruleset modRules;
-
 		[ObjectCreator.UseCtor]
 		public InstallMusicLogic(Widget widget, Ruleset modRules)
 		{
-			this.modRules = modRules;
-
-			installData = Game.modData.Manifest.ContentInstaller;
-
-			installButton = widget.GetOrNull<ButtonWidget>("INSTALL_BUTTON");
-			if (installButton != null)
-			{
-				installButton.OnClick = () => LoadInstallMusicContainer();
-				installButton.IsVisible = () =>
-					modRules.InstalledMusic.ToArray().Length <= Exts.ParseIntegerInvariant(installData["ShippedSoundtracks"]);
-			}
-		}
-
-		bool previousShowShellSetting;
-		void LoadInstallMusicContainer()
-		{
-			var installMusicContainer = Ui.OpenWindow("INSTALL_MUSIC_PANEL", new WidgetArgs());
+			var installMusicContainer = widget.Get("INSTALL_MUSIC_PANEL");
 
 			Action after = () =>
 			{
-				try
-				{
-					GlobalFileSystem.LoadFromManifest(Game.modData.Manifest);
-					modRules.Music.Do(m => m.Value.Reload());
-					var musicPlayerLogic = (MusicPlayerLogic)installButton.Parent.LogicObject;
-					musicPlayerLogic.BuildMusicTable();
-					Ui.CloseWindow();
-					Game.Settings.Game.ShowShellmap = previousShowShellSetting;
-				}
-				catch (Exception e)
-				{
-					Log.Write("debug", "Mounting the new MIX file and rebuild of scores list failed:\n{0}", e);
-				}
+				var args = new string[] { "Game.Mod=" + Game.Settings.Game.Mod };
+				Game.InitializeWithMod(new Arguments(args));
 			};
 
 			var cancelButton = installMusicContainer.GetOrNull<ButtonWidget>("CANCEL_BUTTON");
@@ -66,8 +35,8 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 			{
 				cancelButton.OnClick = () =>
 				{
-					Game.Settings.Game.ShowShellmap = previousShowShellSetting;
-					Ui.CloseWindow();
+					var args = new string[] { "Game.Mod=" + Game.Settings.Game.Mod };
+					Game.InitializeWithMod(new Arguments(args));
 				};
 			}
 
@@ -76,9 +45,6 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 			{
 				ripFromDiscButton.OnClick = () =>
 				{
-					previousShowShellSetting = Game.Settings.Game.ShowShellmap;
-					Game.Settings.Game.ShowShellmap = false;
-					GlobalFileSystem.UnmountAll();
 					Ui.OpenWindow("INSTALL_FROMCD_PANEL", new WidgetArgs() {
 						{ "continueLoading", after },
 					});
@@ -88,14 +54,12 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 			var downloadButton = installMusicContainer.GetOrNull<ButtonWidget>("DOWNLOAD_BUTTON");
 			if (downloadButton != null)
 			{
+				var installData = Game.modData.Manifest.ContentInstaller;
 				downloadButton.IsVisible = () => !string.IsNullOrEmpty(installData["MusicPackageMirrorList"]);
 				var musicInstallData = new Dictionary<string, string> { };
 				musicInstallData["PackageMirrorList"] =  installData["MusicPackageMirrorList"];
 				downloadButton.OnClick = () =>
 				{
-					previousShowShellSetting = Game.Settings.Game.ShowShellmap;
-					Game.Settings.Game.ShowShellmap = false;
-					GlobalFileSystem.UnmountAll();
 					Ui.OpenWindow("INSTALL_DOWNLOAD_PANEL", new WidgetArgs() {
 						{ "afterInstall", after },
 						{ "installData", musicInstallData },
