@@ -130,7 +130,7 @@ LoadScreen: CncLoadScreen
 	Text: Loading
 
 ContentInstaller:
-	TestFiles: conquer.mix, desert.mix, general.mix, sounds.mix, speech.mix, temperat.mix, tempicnh.mix, winter.mix
+	TestFiles: conquer.mix, desert.mix, sounds.mix, speech.mix, temperat.mix, tempicnh.mix, winter.mix
 	InstallerBackgroundWidget: INSTALL_BACKGROUND
 	InstallerMenuWidget: INSTALL_PANEL
 	PackageMirrorList: http://open-ra.org/packages/cnc-mirrors.txt
