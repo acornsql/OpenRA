@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using OpenRA.FileFormats;
+using OpenRA.FileSystem;
 using OpenRA.Graphics;
 using OpenRA.Network;
 using OpenRA.Widgets;
@@ -29,7 +30,7 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 		MapPreview selectedMapPreview;
 
 		[ObjectCreator.UseCtor]
-		public MissionBrowserLogic(Widget widget, Action onStart, Action onExit)
+		public MissionBrowserLogic(Widget widget, Ruleset modRules, Action onStart, Action onExit)
 		{
 			this.onStart = onStart;
 
@@ -78,6 +79,17 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 				Ui.CloseWindow();
 				onExit();
 			};
+
+			var installButton = widget.GetOrNull<ButtonWidget>("INSTALL_BUTTON");
+			if (installButton != null)
+			{
+				var args = new string[] {
+					"Game.Mod=" + Game.Settings.Game.Mod,
+					"Launch.Window=INSTALL_FMV_PANEL"
+				};
+				installButton.OnClick = () => Game.InitializeWithMod(new Arguments(args));
+				installButton.IsVisible = () => !modRules.Movies.All(m => GlobalFileSystem.Exists(m.Key));
+			}
 		}
 
 		void SelectMap(Map map)

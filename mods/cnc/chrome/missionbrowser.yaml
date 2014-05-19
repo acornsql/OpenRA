@@ -73,6 +73,13 @@ Container@MISSIONBROWSER_PANEL:
 			Text: Back
 			Font: Bold
 			Key: escape
+		Button@INSTALL_BUTTON:
+			X: PARENT_RIGHT - 300
+			Y: 359
+			Width: 140
+			Height: 35
+			Text: Install Videos
+			Font: Bold
 		Button@STARTGAME_BUTTON:
 			X: PARENT_RIGHT - 140
 			Y: 359
@@ -81,3 +88,54 @@ Container@MISSIONBROWSER_PANEL:
 			Text: Start Game
 			Font: Bold
 
+Container@INSTALL_FMV_PANEL:
+	Logic: InstallVideosLogic
+	X: (WINDOW_RIGHT - WIDTH)/2
+	Y: (WINDOW_BOTTOM - 150)/2
+	Width: 640
+	Height: 150
+	Children:
+		Label@TITLE:
+			Width: PARENT_RIGHT
+			Y: 0-25
+			Font: BigBold
+			Contrast: true
+			Align: Center
+			Text: Install Videos
+		Background@bg:
+			Width: 640
+			Height: 150
+			Background: panel-black
+			Children:
+				Image@INSTALL:
+					X: 11
+					Y: 11
+					ImageCollection: logos
+					ImageName: install
+		Label@INFO:
+			X: 170
+			Y: 35
+			Width: PARENT_RIGHT-30
+			Height: 25
+			Text: The full motion videos are currently unavailable.
+			Font: Bold
+		Label@INFO2:
+			X: 170
+			Y: 70
+			Width: PARENT_RIGHT-185
+			Height: 25
+			WordWrap: true
+			Text: OpenRA can install them from the original C&C CDs.
+			Font: Bold
+		Button@CANCEL_BUTTON:
+			Key: escape
+			Y: 149
+			Width: 140
+			Height: 35
+			Text: Back
+		Button@RIP_FROM_CD_BUTTON:
+			X: 500
+			Y: 149
+			Width: 140
+			Height: 35
+			Text: Use CD

@@ -137,7 +137,7 @@ ContentInstaller:
 	DiskTestFiles: conquer.mix, desert.mix, install/setup.z
 	PackageToExtractFromCD: install/setup.z
 	ExtractFilesFromCD: speech.mix, tempicnh.mix, transit.mix
-	CopyFilesFromCD: conquer.mix, desert.mix, general.mix, scores.mix, sounds.mix, temperat.mix, winter.mix
+	CopyFilesFromCD: conquer.mix, desert.mix, general.mix, scores.mix, sounds.mix, temperat.mix, winter.mix, movies.mix
 	ShippedSoundtracks: 2
 	MusicPackageMirrorList: http://open-ra.org/packages/cnc-music-mirrors.txt
 

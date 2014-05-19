@@ -54,6 +54,8 @@ namespace OpenRA
 				var dest = Path.Combine(destPath, file);
 				if (File.Exists(dest))
 					File.Delete(dest);
+				if (!GlobalFileSystem.Exists(file))
+					continue;
 				using (var sourceStream = GlobalFileSystem.Open(file))
 				using (var destStream = File.Create(dest))
 				{
