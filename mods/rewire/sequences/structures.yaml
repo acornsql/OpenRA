@@ -1,0 +1,38 @@
+gacnst:
+	damaged-idle-top: gtcnst_c
+		Start: 14
+		Length: 14
+		Tick: 200
+	critical-idle-top: gtcnst_c
+		Start: 27
+
+naapwr:
+	idle-lights: ntapwr_a
+		Start: 0
+		Length: 7
+		Tick: 200
+	damaged-idle-lights: ntapwr_a
+		Start: 7
+		Length: 7
+		Tick: 200
+	critical-idle-lights: ntapwr_a
+		Start: 7
+		Length: 7
+		Tick: 200
+
+naradr:
+	idle-dish: ntradr # TODO: ntradr_a is busted
+		Start: 0
+		ShadowStart: 3
+		Length: 1
+	damaged-idle-dish: ntradr # TODO: ntradr_a is busted
+		Start: 1
+		ShadowStart: 4
+		Length: 1
+
+gaarty:
+	make: gaartymk
+		Start: 0
+		Length: 3
+		ShadowStart: 3
+		Offset: 0,-12

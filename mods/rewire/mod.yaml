@@ -83,6 +83,7 @@ Sequences:
 	mods/ts/sequences/aircraft.yaml
 	mods/ts/sequences/infantry.yaml
 	mods/ts/sequences/misc.yaml
+	mods/rewire/sequences/structures.yaml
 	mods/ts/sequences/structures.yaml
 	mods/ts/sequences/vehicles.yaml
 	mods/ts/sequences/trees.yaml
