@@ -1,0 +1,6 @@
+World:
+	PaletteFromFile@buildings:
+		Name: buildings
+		Filename: forbuildings01.pal
+		ShadowIndex: 1
+
