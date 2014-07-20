@@ -1,0 +1,35 @@
+NAPOWR:
+	RenderBuilding:
+		Palette: nod
+
+NAAPWR:
+	RenderBuilding:
+		Palette: nod
+
+GAPOWR:
+	RenderBuilding:
+		Palette: gdi
+
+GAHPAD:
+	RenderBuilding:
+		Palette: gdi
+
+NAHPAD:
+	RenderBuilding:
+		Palette: nod
+
+GARADR:
+	RenderBuilding:
+		Palette: gdi
+
+NARADR:
+	RenderBuilding:
+		Palette: nod
+
+GAWEAP:
+	RenderBuilding:
+		Palette: gdi
+
+NAWEAP:
+	RenderBuilding:
+		Palette: nod

@@ -3,4 +3,11 @@ World:
 		Name: buildings
 		Filename: forbuildings01.pal
 		ShadowIndex: 1
-
+	PaletteFromFile@nod:
+		Name: nod
+		Filename: nodunittem.pal
+		ShadowIndex: 1
+	PaletteFromFile@gdi:
+		Name: gdi
+		Filename: gdiunittem.pal
+		ShadowIndex: 1
