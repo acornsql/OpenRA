@@ -70,6 +70,7 @@ PackageContents:
 Rules:
 	mods/ts/rules/misc.yaml
 	mods/ts/rules/ai.yaml
+	mods/rewire/rules/player.yaml
 	mods/ts/rules/player.yaml
 	mods/rewire/rules/world.yaml
 	mods/ts/rules/world.yaml

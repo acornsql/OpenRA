@@ -1,35 +1,35 @@
 NAPOWR:
 	RenderBuilding:
-		Palette: nod
+		PlayerPalette: player-nod
 
 NAAPWR:
 	RenderBuilding:
-		Palette: nod
+		PlayerPalette: player-nod
 
 GAPOWR:
 	RenderBuilding:
-		Palette: gdi
+		PlayerPalette: player-gdi
 
 GAHPAD:
 	RenderBuilding:
-		Palette: gdi
+		PlayerPalette: player-gdi
 
 NAHPAD:
 	RenderBuilding:
-		Palette: nod
+		PlayerPalette: player-nod
 
 GARADR:
 	RenderBuilding:
-		Palette: gdi
+		PlayerPalette: player-gdi
 
 NARADR:
 	RenderBuilding:
-		Palette: nod
+		PlayerPalette: player-nod
 
 GAWEAP:
 	RenderBuilding:
-		Palette: gdi
+		PlayerPalette: player-gdi
 
 NAWEAP:
 	RenderBuilding:
-		Palette: nod
+		PlayerPalette: player-nod
