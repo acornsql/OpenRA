@@ -1,0 +1,80 @@
+MCV:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+APC:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+HARV:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+		LightPitch: 180
+
+HVR:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+TRUCKB:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+LPST:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+ICBM:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+REPAIR:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+ART2:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+WEED:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+BGGY:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+SAPC:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+SUBTANK:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+SONIC:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+TTNK:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+STNK:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+BIKE:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+BUS:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+PICK:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113
+
+CAR:
+	RenderVoxels:
+		Scale: 1 # workaround for https://github.com/OpenRA/OpenRA/issues/4113

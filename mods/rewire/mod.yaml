@@ -78,6 +78,7 @@ Rules:
 	mods/ts/rules/defaults.yaml
 	mods/ts/rules/infantry.yaml
 	mods/ts/rules/structures.yaml
+	mods/rewire/rules/vehicles.yaml
 	mods/ts/rules/vehicles.yaml
 	mods/ts/rules/trees.yaml
 
