@@ -11,3 +11,6 @@ World:
 		Name: gdi
 		Filename: gdiunittem.pal
 		ShadowIndex: 1
+	VoxelNormalsPalette@normals:
+		Name: normals
+		Type: RedAlert2
