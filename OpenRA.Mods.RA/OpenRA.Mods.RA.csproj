@@ -523,6 +523,7 @@
     <Compile Include="UtilityCommands\ExportCharacterSeparatedRules.cs" />
     <Compile Include="UtilityCommands\Extensions.cs" />
     <Compile Include="UtilityCommands\ActorStatsExport.cs" />
+    <Compile Include="Lint\CheckMapScripts.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenRA.Game\OpenRA.Game.csproj">
