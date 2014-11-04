@@ -209,7 +209,7 @@ namespace OpenRA
 			}
 
 			GlobalFileSystem.Mount(Platform.GameDir); // Needed to access shaders
-			var renderers = new[] { Settings.Graphics.Renderer, "Sdl2", null };
+			var renderers = new[] { Settings.Graphics.Renderer, "Default", null };
 			foreach (var r in renderers)
 			{
 				if (r == null)
