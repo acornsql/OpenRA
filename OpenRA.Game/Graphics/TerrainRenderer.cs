@@ -16,33 +16,59 @@ namespace OpenRA.Graphics
 	sealed class TerrainRenderer : IDisposable
 	{
 		readonly IVertexBuffer<Vertex> vertexBuffer;
-		readonly World world;
+		readonly Vertex[] updateCellVertices = new Vertex[4];
+		readonly int terrainPaletteIndex;
+		readonly int rowStride;
+
+		readonly WorldRenderer worldRenderer;
+		readonly Theater theater;
+		readonly CellLayer<TerrainTile> mapTiles;
 		readonly Map map;
 
 		public TerrainRenderer(World world, WorldRenderer wr)
 		{
-			this.world = world;
-			this.map = world.Map;
+			worldRenderer = wr;
+			theater = wr.Theater;
+			map = world.Map;
+			mapTiles = map.MapTiles.Value;
 
-			var terrainPalette = wr.Palette("terrain").Index;
-			var vertices = new Vertex[4 * map.Bounds.Height * map.Bounds.Width];
+			terrainPaletteIndex = wr.Palette("terrain").Index;
+			rowStride = 4 * map.Bounds.Width;
+
+			var vertices = new Vertex[rowStride * map.Bounds.Height];
+			vertexBuffer = Game.Renderer.Device.CreateVertexBuffer(vertices.Length);
+
 			var nv = 0;
-
 			foreach (var cell in map.Cells)
 			{
-				var tile = wr.Theater.TileSprite(map.MapTiles.Value[cell]);
-				var pos = wr.ScreenPosition(map.CenterOfCell(cell)) + tile.offset - 0.5f * tile.size;
-				Util.FastCreateQuad(vertices, pos, tile, terrainPalette, nv, tile.size);
+				GenerateTileVertices(vertices, nv, cell);
 				nv += 4;
 			}
 
-			vertexBuffer = Game.Renderer.Device.CreateVertexBuffer(vertices.Length);
 			vertexBuffer.SetData(vertices, nv);
+
+			map.MapTiles.Value.CellEntryChanged += UpdateCell;
+			map.MapHeight.Value.CellEntryChanged += UpdateCell;
+		}
+
+		void GenerateTileVertices(Vertex[] vertices, int offset, CPos cell)
+		{
+			var tile = theater.TileSprite(mapTiles[cell]);
+			var pos = worldRenderer.ScreenPosition(map.CenterOfCell(cell)) + tile.offset - 0.5f * tile.size;
+			Util.FastCreateQuad(vertices, pos, tile, terrainPaletteIndex, offset, tile.size);
+		}
+
+		public void UpdateCell(CPos cell)
+		{
+			var uv = Map.CellToMap(map.TileShape, cell);
+			var offset = rowStride * (uv.Y - map.Bounds.Top) + 4 * (uv.X - map.Bounds.Left);
+
+			GenerateTileVertices(updateCellVertices, 0, cell);
+			vertexBuffer.SetData(updateCellVertices, offset, 4);
 		}
 
 		public void Draw(WorldRenderer wr, Viewport viewport)
 		{
-			var verticesPerRow = 4 * map.Bounds.Width;
 			var cells = viewport.VisibleCells;
 			var shape = wr.world.Map.TileShape;
 
@@ -52,10 +78,10 @@ namespace OpenRA.Graphics
 			var lastRow = Map.CellToMap(shape, cells.BottomRight).Y - map.Bounds.Top + 1;
 
 			Game.Renderer.WorldSpriteRenderer.DrawVertexBuffer(
-				vertexBuffer, verticesPerRow * firstRow, verticesPerRow * (lastRow - firstRow),
+				vertexBuffer, rowStride * firstRow, rowStride * (lastRow - firstRow),
 				PrimitiveType.QuadList, wr.Theater.Sheet);
 
-			foreach (var r in world.WorldActor.TraitsImplementing<IRenderOverlay>())
+			foreach (var r in wr.world.WorldActor.TraitsImplementing<IRenderOverlay>())
 				r.Render(wr);
 		}
 
