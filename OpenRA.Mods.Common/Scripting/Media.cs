@@ -18,6 +18,9 @@ namespace OpenRA.Mods.Common.Scripting
 	{
 		public static void PlayFMVFullscreen(World w, string movie, Action onComplete)
 		{
+			if ((w.Paused && w.PauseStateLocked) || w.IsReplay)
+				return;
+
 			var playerRoot = Game.OpenWindow(w, "FMVPLAYER");
 			var player = playerRoot.Get<VqaPlayerWidget>("PLAYER");
 

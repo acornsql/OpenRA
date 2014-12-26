@@ -21,8 +21,14 @@ namespace OpenRA.Mods.Common.Traits
 
 	class RenderEditorOnly : RenderSimple
 	{
-		public RenderEditorOnly(Actor self) : base(self, () => 0) { }
+		public RenderEditorOnly(Actor self) : base(self) { }
 
-		public override IEnumerable<IRenderable> Render(Actor self, WorldRenderer wr) { return SpriteRenderable.None; }
+		public override IEnumerable<IRenderable> Render(Actor self, WorldRenderer wr)
+		{
+			if (self.World.Paused && self.World.PauseStateLocked)
+				return base.Render(self, wr);
+			else
+				return SpriteRenderable.None;
+		}
 	}
 }

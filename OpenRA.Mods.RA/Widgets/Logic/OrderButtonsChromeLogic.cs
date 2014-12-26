@@ -123,6 +123,21 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 				stats.IsDisabled = () => disableSystemButtons;
 				stats.OnClick = () => OpenMenuPanel(stats);
 			}
+
+			var editorSave = widget.GetOrNull<ButtonWidget>("EDITOR_SAVE_BUTTON");
+			if (editorSave != null)
+			{
+				editorSave.IsDisabled = () => disableSystemButtons;
+				editorSave.OnClick = () =>
+				{
+					widget.Visible = false;
+					Ui.OpenWindow("SAVE_MAP_PANEL", new WidgetArgs()
+					{
+						{ "onExit", () => widget.Visible = true },
+						{ "world", world },
+					});
+				};
+			}
 		}
 
 		void OpenMenuPanel(MenuButtonWidget button, WidgetArgs widgetArgs = null)

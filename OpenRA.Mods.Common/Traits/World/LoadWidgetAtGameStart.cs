@@ -31,11 +31,14 @@ namespace OpenRA.Mods.Common.Traits
 
 		public void WorldLoaded(World world, WorldRenderer wr)
 		{
+			// HACK to make shellmaps not load "MAINMENU" instead
+			var widget = world.Paused && world.PauseStateLocked ? "INGAME_ROOT" : info.Widget;
+
 			// Clear any existing widget state
 			if (info.ClearRoot)
 				Ui.ResetAll();
 
-			Game.LoadWidget(world, info.Widget, Ui.Root, new WidgetArgs());
+			Game.LoadWidget(world, widget, Ui.Root, new WidgetArgs());
 		}
 	}
 }

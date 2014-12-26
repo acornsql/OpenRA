@@ -40,7 +40,9 @@ namespace OpenRA.Mods.D2k.Widgets.Logic
 			playerRoot = worldRoot.Get("PLAYER_ROOT");
 
 			InitRootWidgets();
-			if (world.LocalPlayer == null)
+			if (world.Paused && world.PauseStateLocked)
+				InitEditorWidgets();
+			else if (world.LocalPlayer == null)
 				InitObserverWidgets();
 			else
 				InitPlayerWidgets();
@@ -64,6 +66,11 @@ namespace OpenRA.Mods.D2k.Widgets.Logic
 		}
 
 		enum RadarBinState { Closed, BinAnimating, RadarAnimating, Open }
+		void InitEditorWidgets()
+		{
+			Game.LoadWidget(world, "EDITOR_WIDGETS", playerRoot, new WidgetArgs());
+		}
+
 		void InitPlayerWidgets()
 		{
 			var playerWidgets = Game.LoadWidget(world, "PLAYER_WIDGETS", playerRoot, new WidgetArgs());

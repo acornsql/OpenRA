@@ -36,6 +36,9 @@ namespace OpenRA.Mods.Common.Scripting
 
 		public void WorldLoaded(World world, WorldRenderer worldRenderer)
 		{
+			if (world.Paused && world.PauseStateLocked)
+				return;
+
 			var scripts = info.Scripts ?? new string[0];
 			context = new ScriptContext(world, worldRenderer, scripts);
 			context.WorldLoaded();

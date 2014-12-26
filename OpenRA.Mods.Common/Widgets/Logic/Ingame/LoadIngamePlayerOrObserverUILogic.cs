@@ -23,7 +23,9 @@ namespace OpenRA.Mods.Common.Widgets.Logic
 			var menuRoot = ingameRoot.Get("MENU_ROOT");
 			var playerRoot = worldRoot.Get("PLAYER_ROOT");
 
-			if (world.LocalPlayer == null)
+			if (world.Paused && world.PauseStateLocked)
+				Game.LoadWidget(world, "EDITOR_WIDGETS", playerRoot, new WidgetArgs());
+			else if (world.LocalPlayer == null)
 				Game.LoadWidget(world, "OBSERVER_WIDGETS", playerRoot, new WidgetArgs());
 			else
 			{
