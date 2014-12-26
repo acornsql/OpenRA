@@ -413,6 +413,13 @@
     <Compile Include="Lint\CheckMapRules.cs" />
     <Compile Include="Activities\Air\HeliFlyCircle.cs" />
     <Compile Include="Render\Hovers.cs" />
+    <Compile Include="Widgets\Logic\NewMapLogic.cs" />
+    <Compile Include="Widgets\Logic\SaveMapLogic.cs" />
+    <Compile Include="Widgets\Logic\TileSelectorLogic.cs" />
+    <Compile Include="Widgets\MapEditorWidget.cs" />
+    <Compile Include="Widgets\Logic\LayerSelectorLogic.cs" />
+    <Compile Include="Widgets\Logic\ActorSelectorLogic.cs" />
+    <Compile Include="Widgets\Logic\MapEditorLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenRA.Game\OpenRA.Game.csproj">

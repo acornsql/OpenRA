@@ -106,6 +106,9 @@ namespace OpenRA.Mods.RA
 
 		public void TickIdle(Actor self)
 		{
+			if (self.World.Type == WorldType.Editor)
+				return;
+
 			if (Stance < UnitStance.Defend || !info.TargetWhenIdle)
 				return;
 
@@ -116,6 +119,9 @@ namespace OpenRA.Mods.RA
 
 		public void Tick(Actor self)
 		{
+			if (self.World.Type == WorldType.Editor)
+				return;
+
 			if (nextScanTime > 0)
 				--nextScanTime;
 		}

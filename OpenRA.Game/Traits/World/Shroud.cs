@@ -66,6 +66,9 @@ namespace OpenRA.Traits
 
 		public Shroud(Actor self)
 		{
+			if (self.World.Type == WorldType.Editor)
+				return;
+
 			this.self = self;
 			map = self.World.Map;
 

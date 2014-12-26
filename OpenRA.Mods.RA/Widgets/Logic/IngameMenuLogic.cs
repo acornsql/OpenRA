@@ -37,7 +37,9 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 			// TODO: Create a mechanism to do things like this cleaner. Also needed for scripted missions
 			Action onQuit = () =>
 			{
-				Sound.PlayNotification(world.Map.Rules, null, "Speech", "Leave", world.LocalPlayer == null ? null : world.LocalPlayer.Country.Race);
+				if (world.Type == WorldType.Regular)
+					Sound.PlayNotification(world.Map.Rules, null, "Speech", "Leave", world.LocalPlayer == null ? null : world.LocalPlayer.Country.Race);
+
 				resumeDisabled = true;
 
 				var exitDelay = 1200;
@@ -64,18 +66,29 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 
 			Action showMenu = () => hideMenu = false;
 
-			menu.Get<ButtonWidget>("ABORT_MISSION").OnClick = () =>
+			var abortMissionButton = menu.Get<ButtonWidget>("ABORT_MISSION");
+			abortMissionButton.IsVisible = () => world.Type == WorldType.Regular;
+			abortMissionButton.OnClick = () =>
 			{
 				hideMenu = true;
 				ConfirmationDialogs.PromptConfirmAction("Abort Mission", "Leave this game and return to the menu?", onQuit, showMenu);
 			};
 
-			Action onSurrender = () => 
+			var exitEditorButton = menu.Get<ButtonWidget>("EXIT_EDITOR");
+			exitEditorButton.IsVisible = () => world.Type == WorldType.Editor;
+			exitEditorButton.OnClick = () =>
+			{
+				hideMenu = true;
+				ConfirmationDialogs.PromptConfirmAction("Exit Map Editor", "Exit and lose all unsaved changes?", onQuit, showMenu);
+			};
+
+			Action onSurrender = () =>
 			{
 				world.IssueOrder(new Order("Surrender", world.LocalPlayer.PlayerActor, false));
 				closeMenu();
 			};
 			var surrenderButton = menu.Get<ButtonWidget>("SURRENDER");
+			surrenderButton.IsVisible = () => world.Type == WorldType.Regular;
 			surrenderButton.IsDisabled = () => (world.LocalPlayer == null || world.LocalPlayer.WinState != WinState.Undefined);
 			surrenderButton.OnClick = () =>
 			{
@@ -83,6 +96,17 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 				ConfirmationDialogs.PromptConfirmAction("Surrender", "Are you sure you want to surrender?", onSurrender, showMenu);
 			};
 			surrenderButton.IsDisabled = () => world.LocalPlayer == null || world.LocalPlayer.WinState != WinState.Undefined;
+
+			var saveMapButton = menu.Get<ButtonWidget>("SAVE_MAP");
+			saveMapButton.IsVisible = () => world.Type == WorldType.Editor;
+			saveMapButton.OnClick = () =>
+			{
+				Ui.OpenWindow("SAVE_MAP_PANEL", new WidgetArgs()
+					{
+						{ "onExit", () => widget.Visible = true },
+						{ "world", world },
+					});
+			};
 
 			menu.Get<ButtonWidget>("MUSIC").OnClick = () =>
 			{

@@ -101,8 +101,9 @@ namespace OpenRA.Mods.RA.Widgets
 			{
 				leaveButton.Disabled = true;
 
-				Sound.PlayNotification(world.Map.Rules, null, "Speech", "Leave",
-					world.LocalPlayer == null ? null : world.LocalPlayer.Country.Race);
+				if (world.Type == WorldType.Regular)
+					Sound.PlayNotification(world.Map.Rules, null, "Speech", "Leave",
+						world.LocalPlayer == null ? null : world.LocalPlayer.Country.Race);
 
 				var exitDelay = 1200;
 				if (mpe != null)

@@ -4,11 +4,6 @@ Container@INGAME_ROOT:
 			Children:
 				LogicTicker@DISCONNECT_WATCHER:
 					Logic: DisconnectWatcherLogic
-				WorldInteractionController@INTERACTION_CONTROLLER:
-					X: 0
-					Y: 0
-					Width: WINDOW_RIGHT
-					Height: WINDOW_BOTTOM
 				ViewportController:
 					X: 0
 					Y: 0
@@ -20,13 +15,6 @@ Container@INGAME_ROOT:
 					Y: 0
 					Width: WINDOW_RIGHT
 					Height: WINDOW_BOTTOM
-				StrategicProgress@STRATEGIC_PROGRESS:
-					X: WINDOW_RIGHT/2
-					Y: 40
-				SupportPowerTimer@SUPPORT_POWER_TIMER:
-					X: 80
-					Y: 34
-					Order: Descending
 				Container@PLAYER_ROOT:
 				Container@PERFORMANCE_INFO:
 					Logic: PerfDebugLogic
@@ -50,24 +38,5 @@ Container@INGAME_ROOT:
 									Y: 5
 									Width: 200
 									Height: 200
-				Container@GAME_TIMER_BLOCK:
-					Logic: GameTimerLogic
-					X: WINDOW_RIGHT/2 - WIDTH
-					Width: 100
-					Height: 55
-					Children:
-						Label@GAME_TIMER:
-							Width: PARENT_RIGHT
-							Height: 15
-							Align: Center
-							Font: Title
-							Contrast: true
-						Label@GAME_TIMER_STATUS:
-							Y: 35
-							Width: PARENT_RIGHT
-							Height: 15
-							Align: Center
-							Font: Bold
-							Contrast: true
 		Container@MENU_ROOT:
 		TooltipContainer@TOOLTIP_CONTAINER:

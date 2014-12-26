@@ -31,6 +31,9 @@ namespace OpenRA.Traits
 
 		public void Tick(Actor self)
 		{
+			if (self.World.Type == WorldType.Editor)
+				return;
+
 			var disabled = self.TraitsImplementing<IDisable>().Any(d => d.Disabled);
 			if (cachedLocation != self.Location || cachedDisabled != disabled)
 			{

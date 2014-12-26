@@ -30,6 +30,9 @@ namespace OpenRA.Traits
 
 		public void Tick(Actor self)
 		{
+			if (self.World.Type == WorldType.Editor)
+				return;
+
 			if (cachedLocation != self.Location)
 			{
 				cachedLocation = self.Location;

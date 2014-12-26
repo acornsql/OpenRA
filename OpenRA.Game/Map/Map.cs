@@ -764,13 +764,16 @@ namespace OpenRA
 				Players.Add(p.Name, p);
 			}
 
-			Players.Add("Creeps", new PlayerReference
+			if (!Players.ContainsKey("Creeps")) // TODO: then update it
 			{
-				Name = "Creeps",
-				Race = firstRace,
-				NonCombatant = true,
-				Enemies = Players.Where(p => p.Value.Playable).Select(p => p.Key).ToArray()
-			});
+				Players.Add("Creeps", new PlayerReference
+				{
+					Name = "Creeps",
+					Race = firstRace,
+					NonCombatant = true,
+					Enemies = Players.Where(p => p.Value.Playable).Select(p => p.Key).ToArray()
+				});
+			}
 		}
 
 		public void FixOpenAreas(Ruleset rules)

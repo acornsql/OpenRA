@@ -62,7 +62,7 @@ namespace OpenRA.Graphics
 
 			set
 			{
-				zoom = value;
+				zoom = value.Clamp(0.25f, 2f);
 				viewportSize = (1f / zoom * new float2(Game.Renderer.Resolution)).ToInt2();
 				cellsDirty = true;
 			}

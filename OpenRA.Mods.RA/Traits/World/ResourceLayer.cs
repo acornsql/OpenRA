@@ -67,14 +67,18 @@ namespace OpenRA.Mods.RA.Traits
 			content = new CellLayer<CellContents>(w.Map);
 			render = new CellLayer<CellContents>(w.Map);
 			dirty = new List<CPos>();
+			Update();
+		}
 
-			var resources = w.WorldActor.TraitsImplementing<ResourceType>()
+		public void Update()
+		{
+			var resources = world.WorldActor.TraitsImplementing<ResourceType>()
 				.ToDictionary(r => r.Info.ResourceType, r => r);
 
-			foreach (var cell in w.Map.Cells)
+			foreach (var cell in world.Map.Cells)
 			{
 				ResourceType t;
-				if (!resources.TryGetValue(w.Map.MapResources.Value[cell].Type, out t))
+				if (!resources.TryGetValue(world.Map.MapResources.Value[cell].Type, out t))
 					continue;
 
 				if (!AllowResourceAt(t, cell))
@@ -84,7 +88,7 @@ namespace OpenRA.Mods.RA.Traits
 			}
 
 			// Set initial density based on the number of neighboring resources
-			foreach (var cell in w.Map.Cells)
+			foreach (var cell in world.Map.Cells)
 			{
 				var type = content[cell].Type;
 				if (type != null)

@@ -369,6 +369,11 @@ namespace OpenRA
 				modData.LoadScreen.StartGame(args);
 		}
 
+		public static void LoadMapForEditing(string mapUid)
+		{
+			StartGame(mapUid, WorldType.Editor);
+		}
+
 		public static void LoadShellMap()
 		{
 			var shellmap = ChooseShellmap();

@@ -1,5 +1,33 @@
 Container@OBSERVER_WIDGETS:
 	Children:
+		Container@GAME_TIMER_BLOCK:
+			Logic: GameTimerLogic
+			X: WINDOW_RIGHT/2 - WIDTH
+			Width: 100
+			Height: 55
+			Children:
+				Label@GAME_TIMER:
+					Width: PARENT_RIGHT
+					Height: 15
+					Align: Center
+					Font: Title
+					Contrast: true
+				Label@GAME_TIMER_STATUS:
+					Y: 35
+					Width: PARENT_RIGHT
+					Height: 15
+					Align: Center
+					Font: Bold
+					Contrast: true
+		SupportPowerTimer@SUPPORT_POWER_TIMER:
+			X: 80
+			Y: 34
+			Order: Descending
+		WorldInteractionController@INTERACTION_CONTROLLER:
+			X: 0
+			Y: 0
+			Width: WINDOW_RIGHT
+			Height: WINDOW_BOTTOM
 		MenuButton@OBSERVER_STATS_BUTTON:
 			Logic: OrderButtonsChromeLogic
 			MenuContainer: INGAME_OBSERVERSTATS_BG
