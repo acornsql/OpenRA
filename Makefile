@@ -376,12 +376,13 @@ install-linux-mime:
 	@$(INSTALL_DATA) packaging/linux/openra-mimeinfo.xml "$(DESTDIR)$(datadir)/mime/packages/openra.xml"
 
 	@$(INSTALL_DIR) "$(DESTDIR)$(datadir)/applications"
+	@$(INSTALL_DATA) packaging/linux/openra-join-servers.desktop "$(DESTDIR)$(datadir)/applications"
 	@$(INSTALL_DATA) packaging/linux/openra-replays.desktop "$(DESTDIR)$(datadir)/applications"
 
 install-linux-scripts:
-	@echo "#!/bin/sh" > openra
+	@echo "#!/bin/bash" > openra
 	@echo 'cd "$(gameinstalldir)"' >> openra
-	@echo 'mono OpenRA.Game.exe "$$@"' >> openra
+	@echo 'mono OpenRA.Game.exe "$${@/openra:\/\//}"' >> openra
 	@echo 'if [ $$? != 0 -a $$? != 1 ]' >> openra
 	@echo 'then' >> openra
 	@echo 'ZENITY=`which zenity` || echo "OpenRA needs zenity installed to display a graphical error dialog. See ~/.openra. for log files."' >> openra
