@@ -9,6 +9,7 @@
 #endregion
 
 using System;
+using System.Drawing;
 using System.Linq;
 using OpenRA.FileFormats;
 using OpenRA.Graphics;
@@ -75,7 +76,7 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 				}
 
 				var td = new TypeDictionary();
-				td.Add(new FacingInit(92));
+				// td.Add(new FacingInit(92)); // TODO: this is not forwarded when placed on the map
 
 				var player = world.Players.FirstOrDefault(p => p.InternalName == editor.SelectedOwner) ?? world.Players.First();
 				var init = new ActorPreviewInitializer(actor, player, worldRenderer, td);
@@ -96,11 +97,23 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 					var actorPreview = newActorPreviewTemplate.Get<ActorPreviewWidget>("ACTOR_PREVIEW");
 					actorPreview.Preview = preview;
 
-					var hackSize = new int2(50, 50);
-					actorPreview.Bounds.Width = hackSize.X;
-					actorPreview.Bounds.Height = hackSize.Y;
-					newActorPreviewTemplate.Bounds.Width = hackSize.X + (actorPreview.Bounds.X * 2);
-					newActorPreviewTemplate.Bounds.Height = hackSize.Y + (actorPreview.Bounds.Y * 2);
+					// TODO: this finds the largest bound, sometimes they should stack though
+					var size = new Rectangle();
+					foreach (var p in preview)
+					{
+						var bounds = p.Bounds();
+
+						if (size.Width < bounds.Width)
+							size.Width = bounds.Width;
+
+						if (size.Height < bounds.Height)
+							size.Height = bounds.Height;
+					}
+
+					actorPreview.Bounds.Width = size.Width;
+					actorPreview.Bounds.Height = size.Height;
+					newActorPreviewTemplate.Bounds.Width = size.Width + (actorPreview.Bounds.X * 2);
+					newActorPreviewTemplate.Bounds.Height = size.Height + (actorPreview.Bounds.Y * 2);
 					newActorPreviewTemplate.IsVisible = () => true;
 					actorTemplateList.AddChild(newActorPreviewTemplate);
 				}

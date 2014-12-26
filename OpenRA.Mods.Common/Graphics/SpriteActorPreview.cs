@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using OpenRA.Graphics;
 using OpenRA.Primitives;
 
@@ -37,6 +38,11 @@ namespace OpenRA.Mods.Common.Graphics
 		public IEnumerable<IRenderable> Render(WorldRenderer wr, WPos pos)
 		{
 			return animation.Render(pos, offset, zOffset, pr, scale);
+		}
+
+		public Rectangle Bounds()
+		{
+			return animation.GetSequence("idle").GetSprite(0).bounds;
 		}
 	}
 }
