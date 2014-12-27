@@ -1,5 +1,4 @@
 Container@INGAME_ROOT:
-	Logic: IngameChromeLogic
 	Children:
 		Container@WORLD_ROOT:
 			Children:
