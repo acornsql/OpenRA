@@ -75,8 +75,8 @@ Background@SAVE_MAP_PANEL:
 	X: (WINDOW_RIGHT - WIDTH)/2
 	Y: (WINDOW_BOTTOM - HEIGHT)/2
 	Width: 350
-	Height: 475
-	Children: 
+	Height: 350
+	Children:
 		Label@LABEL_TITLE:
 			X: (PARENT_RIGHT - WIDTH)/2
 			Y: 20
@@ -124,35 +124,45 @@ Background@SAVE_MAP_PANEL:
 			Width: 210
 			MaxLength: 50
 			Height: 25
-		Checkbox@MAPCHOOSER_CHECKBOX:
+		Label@CLASS_LABEL:
+			X: 10
+			Y: 180
+			Width: 95
+			Height: 25
+			Align: Right
+			Text: Class:
+		DropDownButton@CLASS_DROPDOWN:
 			X: 110
 			Y: 180
-			Width: 300
-			Height: 20
-			Text: Show in Map Chooser
-			Visible:false
-		Checkbox@SHELLMAP_CHECKBOX:
-			X: 110
-			Y: 220
-			Width: 300
-			Height: 20
-			Text: Use as Shellmap
-			Visible: false
+			Width: 210
+			Height: 25
 		Label@PATH_LABEL:
 			X: 10
-			Y: 379
+			Y: 219
 			Width: 40
 			Height: 25
 			Align: Right
 			Text: Path:
 		TextField@PATH:
 			X: 60
-			Y: 380
+			Y: 220
+			Width: 270
+			Height: 25
+		Label@FILENAME_LABEL:
+			X: 10
+			Y: 259
+			Width: 40
+			Height: 25
+			Align: Right
+			Text: File:
+		TextField@FILENAME:
+			X: 60
+			Y: 260
 			Width: 270
 			Height: 25
 		Button@CLOSE:
 			X: 30
-			Y: 420
+			Y: 300
 			Width: 100
 			Height: 25
 			Text: Close
@@ -160,7 +170,7 @@ Background@SAVE_MAP_PANEL:
 			Key: escape
 		Button@SAVE:
 			X: 210
-			Y: 420
+			Y: 300
 			Width: 100
 			Height: 25
 			Text: Save

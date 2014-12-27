@@ -30,7 +30,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		public void WorldLoaded(World world, WorldRenderer wr)
 		{
-			if (world.Paused && world.PauseStateLocked)
+			if (world.Type == WorldType.Regular)
 				Sound.PlayNotification(world.Map.Rules, null, "Speech", info.Notification, null);
 		}
 	}

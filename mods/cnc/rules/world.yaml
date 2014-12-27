@@ -6,7 +6,7 @@ World:
 	ScreenMap:
 	ActorMap:
 	LoadWidgetAtGameStart:
-		Widget: INGAME_ROOT
+		ShellmapWidget: MENU_BACKGROUND
 	MenuPaletteEffect:
 		MenuEffect: Desaturated
 	CloakPaletteEffect:

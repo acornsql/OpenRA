@@ -17,6 +17,7 @@ using OpenRA;
 using OpenRA.FileFormats;
 using OpenRA.Traits;
 using OpenRA.Widgets;
+using OpenRA.Mods.Common.Widgets;
 
 namespace OpenRA.Mods.RA.Widgets.Logic
 {
@@ -58,6 +59,7 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 				int.TryParse(widthTextField.Text, out width);
 				int height;
 				int.TryParse(heightTextField.Text, out height);
+
 				map.Resize(width, height);
 				var borderSize = width / 8; // TODO: unhardcode
 				map.ResizeCordon(borderSize, borderSize, width-borderSize, height-borderSize);
@@ -67,10 +69,13 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 
 				map.FixOpenAreas(modRules);
 
-				var mod = Game.modData.Manifest.Mod;
-				map.RequiresMod = mod.Id;
+				var userMapFolder = Game.modData.Manifest.MapFolders.First(f => f.Value == "User").Key;
 
-				var mapDir = new[] { Platform.SupportDir, "maps", mod.Id }.Aggregate(Path.Combine); // TODO: unhardcode to MapFolders
+				// Ignore optional flag
+				if (userMapFolder.StartsWith("~"))
+					userMapFolder = userMapFolder.Substring(1);
+
+				var mapDir = Platform.ResolvePath(userMapFolder);
 				Directory.CreateDirectory(mapDir);
 				var tempLocation = new [] { mapDir, "temp" }.Aggregate(Path.Combine) + ".oramap";
 				map.Save(tempLocation); // TODO: load it right away and save later properly

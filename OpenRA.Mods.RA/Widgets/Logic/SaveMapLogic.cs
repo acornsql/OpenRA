@@ -9,6 +9,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using OpenRA.Widgets;
@@ -34,12 +35,36 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 			if (author != null)
 				author.Text = newMap.Author;
 
-			var mod = Game.modData.Manifest.Mod;
-			var mapDir = new[] { Platform.SupportDir, "maps", mod.Id }.Aggregate(Path.Combine);  // TODO: unhardcode to MapFolders
-			var defaultPath = new [] { mapDir, world.Map.Title.ToLower().Trim() }.Aggregate(Path.Combine) + ".oramap";
+			var visibilityDropdown = widget.GetOrNull<DropDownButtonWidget>("CLASS_DROPDOWN");
+			if (visibilityDropdown != null)
+			{
+				var mapVisibility = new List<string>(Enum.GetNames(typeof(MapVisibility)));
+				Func<string, ScrollItemWidget, ScrollItemWidget> setupItem = (option, template) =>
+				{
+					var item = ScrollItemWidget.Setup(template,
+						() => visibilityDropdown.Text == option,
+						() => { visibilityDropdown.Text = option; });
+					item.Get<LabelWidget>("LABEL").GetText = () => option;
+					return item;
+				};
+				visibilityDropdown.Text = Enum.GetName(typeof(MapVisibility), newMap.Visibility);
+				visibilityDropdown.OnClick = () =>
+					visibilityDropdown.ShowDropDown("LABEL_DROPDOWN_TEMPLATE", 210, mapVisibility, setupItem);
+			}
+
+			var userMapFolder = Game.modData.Manifest.MapFolders.First(f => f.Value == "User").Key;
+
+			// Ignore optional flag
+			if (userMapFolder.StartsWith("~"))
+				userMapFolder = userMapFolder.Substring(1);
+
 			var path = widget.GetOrNull<TextFieldWidget>("PATH");
 			if (path != null)
-				path.Text = defaultPath;
+				path.Text = Platform.ResolvePath(userMapFolder);
+
+			var filename = widget.GetOrNull<TextFieldWidget>("FILENAME");
+			if (filename != null)
+				filename.Text = world.Map.Title.ToLower().Trim() + ".oramap";
 
 			var close = widget.GetOrNull<ButtonWidget>("CLOSE");
 			if (close != null)
@@ -52,8 +77,10 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 					newMap.Title = title.Text;
 					newMap.Description = description.Text;
 					newMap.Author = author.Text;
-					newMap.Save(path.Text);
-					Game.Debug("Saved current map as {0}", path.Text);
+					newMap.Visibility = (MapVisibility)Enum.Parse(typeof(MapVisibility), visibilityDropdown.Text);
+					var combinedPath = Path.Combine(path.Text, filename.Text);
+					newMap.Save(combinedPath);
+					Game.Debug("Saved current map as {0}", combinedPath);
 				};
 			}
 		}

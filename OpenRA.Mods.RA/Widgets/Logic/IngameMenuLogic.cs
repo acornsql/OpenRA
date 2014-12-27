@@ -37,7 +37,9 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 			// TODO: Create a mechanism to do things like this cleaner. Also needed for scripted missions
 			Action onQuit = () =>
 			{
-				Sound.PlayNotification(world.Map.Rules, null, "Speech", "Leave", world.LocalPlayer == null ? null : world.LocalPlayer.Country.Race);
+				if (world.Type == WorldType.Regular)
+					Sound.PlayNotification(world.Map.Rules, null, "Speech", "Leave", world.LocalPlayer == null ? null : world.LocalPlayer.Country.Race);
+
 				resumeDisabled = true;
 
 				var exitDelay = 1200;

@@ -16,7 +16,10 @@ namespace OpenRA.Mods.Common.Traits
 {
 	public class LoadWidgetAtGameStartInfo : ITraitInfo
 	{
-		public readonly string Widget = null;
+		public readonly string RegularWidget = "INGAME_ROOT";
+		public readonly string EditorWidget = "INGAME_ROOT";
+		public readonly string ShellmapWidget = "MAINMENU";
+
 		public readonly bool ClearRoot = true;
 		public object Create(ActorInitializer init) { return new LoadWidgetAtGameStart(this); }
 	}
@@ -31,8 +34,9 @@ namespace OpenRA.Mods.Common.Traits
 
 		public void WorldLoaded(World world, WorldRenderer wr)
 		{
-			// HACK to make shellmaps not load "MAINMENU" instead
-			var widget = world.Paused && world.PauseStateLocked ? "INGAME_ROOT" : info.Widget;
+			var widget = world.Type == WorldType.Regular ? info.RegularWidget :
+				world.Type == WorldType.Editor ? info.EditorWidget :
+				world.Type == WorldType.Shellmap ? info.ShellmapWidget : null;
 
 			// Clear any existing widget state
 			if (info.ClearRoot)
