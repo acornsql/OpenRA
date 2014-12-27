@@ -29,6 +29,8 @@ namespace OpenRA.Mods.Common.Graphics
 		readonly WVec offset;
 		readonly int zOffset;
 
+		VoxelRenderable voxelRenderable;
+
 		public VoxelPreview(VoxelAnimation[] components, WVec offset, int zOffset, float scale, WAngle lightPitch, WAngle lightYaw, float[] lightAmbientColor, float[] lightDiffuseColor, WAngle cameraPitch,
 			PaletteReference colorPalette, PaletteReference normalsPalette, PaletteReference shadowPalette)
 		{
@@ -52,14 +54,18 @@ namespace OpenRA.Mods.Common.Graphics
 
 		public IEnumerable<IRenderable> Render(WorldRenderer wr, WPos pos)
 		{
-			yield return new VoxelRenderable(components, pos + offset, zOffset, camera, this.scale,
+			voxelRenderable = new VoxelRenderable(components, pos + offset, zOffset, camera, this.scale,
 				lightSource, this.lightAmbientColor, this.lightDiffuseColor,
 				colorPalette, normalsPalette, shadowPalette);
+			yield return voxelRenderable;
 		}
 
 		public Rectangle Bounds()
 		{
-			return new Rectangle(0, 0, 64, 64); // TODO: HACK
+			if (voxelRenderable == null)
+				return new Rectangle(0, 0, 64, 64); // TODO: HACK
+			else
+				return voxelRenderable.Bounds();
 		}
 	}
 }

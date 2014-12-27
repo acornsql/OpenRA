@@ -98,6 +98,11 @@ namespace OpenRA.Mods.Common.Graphics
 				palette, normalsPalette, shadowPalette);
 		}
 
+		public Rectangle Bounds()
+		{
+			return new Rectangle(0, 0, (int)renderProxy.Sprite.size.X, (int)renderProxy.Sprite.size.Y);
+		}
+
 		public void Render(WorldRenderer wr)
 		{
 			// TODO: This is a temporary workaround until we have a proper ramp-aware height calculation
