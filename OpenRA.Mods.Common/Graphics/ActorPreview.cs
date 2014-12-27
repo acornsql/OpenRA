@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using OpenRA.Graphics;
 using OpenRA.Primitives;
 
@@ -19,6 +20,7 @@ namespace OpenRA.Mods.Common.Graphics
 	{
 		void Tick();
 		IEnumerable<IRenderable> Render(WorldRenderer wr, WPos pos);
+		Rectangle Bounds();
 	}
 
 	public class ActorPreviewInitializer

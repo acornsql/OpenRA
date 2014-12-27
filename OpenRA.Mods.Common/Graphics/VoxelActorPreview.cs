@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using OpenRA.Graphics;
 
 namespace OpenRA.Mods.Common.Graphics
@@ -54,6 +55,11 @@ namespace OpenRA.Mods.Common.Graphics
 			yield return new VoxelRenderable(components, pos + offset, zOffset, camera, this.scale,
 				lightSource, this.lightAmbientColor, this.lightDiffuseColor,
 				colorPalette, normalsPalette, shadowPalette);
+		}
+
+		public Rectangle Bounds()
+		{
+			return new Rectangle(0, 0, 64, 64); // TODO: HACK
 		}
 	}
 }
