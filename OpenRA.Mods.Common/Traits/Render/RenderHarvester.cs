@@ -16,7 +16,9 @@ namespace OpenRA.Mods.Common.Traits
 {
 	class RenderHarvesterInfo : RenderUnitInfo, Requires<HarvesterInfo>
 	{
+		/* [SequenceReference] TODO: lint rule does not support arrays */
 		public readonly string[] ImagesByFullness = { "harv" };
+
 		public override object Create(ActorInitializer init) { return new RenderHarvester(init, this); }
 	}
 

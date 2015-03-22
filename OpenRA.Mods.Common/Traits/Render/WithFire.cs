@@ -16,8 +16,8 @@ namespace OpenRA.Mods.Common.Traits
 	[Desc("Renders a flame sprite on top of the actor.")]
 	class WithFireInfo : ITraitInfo, Requires<RenderSpritesInfo>
 	{
-		public readonly string StartSequence = "fire-start";
-		public readonly string LoopSequence = "fire-loop";
+		[SequenceReference] public readonly string StartSequence = "fire-start";
+		[SequenceReference] public readonly string LoopSequence = "fire-loop";
 
 		public object Create(ActorInitializer init) { return new WithFire(init.Self, this); }
 	}

@@ -18,6 +18,8 @@ namespace OpenRA.Mods.Common.Traits
 {
 	public class RenderSimpleInfo : RenderSpritesInfo, IRenderActorPreviewSpritesInfo, IQuantizeBodyOrientationInfo, ILegacyEditorRenderInfo, Requires<IBodyOrientationInfo>
 	{
+		[SequenceReference] public readonly string IdleSequence = "idle";
+
 		public override object Create(ActorInitializer init) { return new RenderSimple(init, this); }
 
 		public virtual IEnumerable<IActorPreview> RenderPreviewSprites(ActorPreviewInitializer init, RenderSpritesInfo rs, string image, int facings, PaletteReference p)
@@ -26,13 +28,13 @@ namespace OpenRA.Mods.Common.Traits
 			var facing = ifacing != null ? init.Contains<FacingInit>() ? init.Get<FacingInit, int>() : ifacing.GetInitialFacing() : 0;
 
 			var anim = new Animation(init.World, image, () => facing);
-			anim.PlayRepeating("idle");
+			anim.PlayRepeating(IdleSequence);
 			yield return new SpriteActorPreview(anim, WVec.Zero, 0, p, rs.Scale);
 		}
 
 		public virtual int QuantizedBodyFacings(ActorInfo ai, SequenceProvider sequenceProvider, string race)
 		{
-			return sequenceProvider.GetSequence(GetImage(ai, sequenceProvider, race), "idle").Facings;
+			return sequenceProvider.GetSequence(GetImage(ai, sequenceProvider, race), IdleSequence).Facings;
 		}
 
 		public string EditorPalette { get { return Palette; } }
@@ -41,11 +43,15 @@ namespace OpenRA.Mods.Common.Traits
 
 	public class RenderSimple : RenderSprites, IAutoSelectionSize
 	{
+		readonly RenderSimpleInfo info;
+
 		public readonly Animation DefaultAnimation;
 
 		public RenderSimple(ActorInitializer init, RenderSimpleInfo info, Func<int> baseFacing)
 			: base(init, info)
 		{
+			this.info = info;
+
 			DefaultAnimation = new Animation(init.World, GetImage(init.Self), baseFacing);
 			Add("", DefaultAnimation);
 		}
@@ -53,7 +59,7 @@ namespace OpenRA.Mods.Common.Traits
 		public RenderSimple(ActorInitializer init, RenderSimpleInfo info)
 			: this(init, info, MakeFacingFunc(init.Self))
 		{
-			DefaultAnimation.PlayRepeating(NormalizeSequence(init.Self, "idle"));
+			DefaultAnimation.PlayRepeating(NormalizeSequence(init.Self, info.IdleSequence));
 		}
 
 		public int2 SelectionSize(Actor self) { return AutoSelectionSize(self); }
@@ -67,7 +73,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			if (DefaultAnimation.HasSequence(name))
 				DefaultAnimation.PlayThen(NormalizeSequence(self, name),
-					() => DefaultAnimation.PlayRepeating(NormalizeSequence(self, "idle")));
+					() => DefaultAnimation.PlayRepeating(NormalizeSequence(self, info.IdleSequence)));
 		}
 	}
 }

@@ -24,7 +24,8 @@ namespace OpenRA.Mods.Common.Traits
 
 		public readonly WVec ProneOffset = new WVec(85, 0, -171);
 
-		public readonly string ProneSequencePrefix = "prone-";
+		// TODO: check the whole sequence with lint rules
+		[SequenceReference] public readonly string ProneSequencePrefix = "prone-";
 
 		public override object Create(ActorInitializer init) { return new TakeCover(init, this); }
 	}

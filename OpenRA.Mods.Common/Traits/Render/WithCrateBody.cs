@@ -23,6 +23,10 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Easteregg sequences to use in december.")]
 		public readonly string[] XmasImages = { };
 
+		[SequenceReference] public readonly string IdleSequence = "idle";
+		[SequenceReference] public readonly string WaterSequence;
+		[SequenceReference] public readonly string LandSequence = "land";
+
 		public object Create(ActorInitializer init) { return new WithCrateBody(init.Self, this); }
 	}
 
@@ -30,20 +34,24 @@ namespace OpenRA.Mods.Common.Traits
 	{
 		readonly Actor self;
 		readonly Animation anim;
+		readonly WithCrateBodyInfo info;
 
 		public WithCrateBody(Actor self, WithCrateBodyInfo info)
 		{
 			this.self = self;
+			this.info = info;
+
 			var rs = self.Trait<RenderSprites>();
 			var images = info.XmasImages.Any() && DateTime.Today.Month == 12 ? info.XmasImages : info.Images;
+
 			anim = new Animation(self.World, images.Random(Game.CosmeticRandom));
-			anim.Play("idle");
+			anim.Play(info.IdleSequence);
 			rs.Add("crate", anim);
 		}
 
 		public void OnLanded()
 		{
-			var seq = self.World.Map.GetTerrainInfo(self.Location).IsWater ? "water" : "land";
+			var seq = self.World.Map.GetTerrainInfo(self.Location).IsWater ? info.WaterSequence : info.LandSequence;
 			anim.PlayRepeating(seq);
 		}
 	}

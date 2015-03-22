@@ -19,7 +19,6 @@ namespace OpenRA.Mods.Common.Traits
 	class RenderBuildingWallInfo : RenderBuildingInfo
 	{
 		public readonly string Type = "wall";
-		public readonly string Sequence = "idle";
 
 		public override object Create(ActorInitializer init) { return new RenderBuildingWall(init, this); }
 
@@ -27,7 +26,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			// Show a static frame instead of animating all of the wall states
 			var anim = new Animation(init.World, image, () => 0);
-			anim.PlayFetchIndex("idle", () => 0);
+			anim.PlayFetchIndex(IdleSequence, () => 0);
 
 			yield return new SpriteActorPreview(anim, WVec.Zero, 0, p, rs.Scale);
 		}
@@ -47,13 +46,13 @@ namespace OpenRA.Mods.Common.Traits
 
 		public override void BuildingComplete(Actor self)
 		{
-			DefaultAnimation.PlayFetchIndex(info.Sequence, () => adjacent);
+			DefaultAnimation.PlayFetchIndex(info.IdleSequence, () => adjacent);
 			UpdateNeighbours(self);
 		}
 
 		public override void DamageStateChanged(Actor self, AttackInfo e)
 		{
-			DefaultAnimation.PlayFetchIndex(NormalizeSequence(DefaultAnimation, e.DamageState, info.Sequence), () => adjacent);
+			DefaultAnimation.PlayFetchIndex(NormalizeSequence(DefaultAnimation, e.DamageState, info.IdleSequence), () => adjacent);
 		}
 
 		public override void Tick(Actor self)

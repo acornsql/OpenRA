@@ -17,15 +17,21 @@ namespace OpenRA.Mods.Common.Traits
 	public class WithDeathAnimationInfo : ITraitInfo, Requires<RenderSpritesInfo>
 	{
 		[Desc("Sequence to play when this actor is killed by a warhead.")]
-		public readonly string DeathSequence = "die";
+		[SequenceReference] public readonly string DeathSequence = "die";
+
 		public readonly string DeathSequencePalette = "player";
+
 		[Desc("Custom death animation palette is a player palette BaseName")]
 		public readonly bool DeathPaletteIsPlayerPalette = true;
+
 		[Desc("Should DeathType-specific sequences be used (sequence name = DeathSequence + DeathType).")]
-		public readonly bool UseDeathTypeSuffix = true;
+		public readonly bool UseDeathTypeSuffix = true; // TODO: check the complete sequence with lint rules
+
 		[Desc("Sequence to play when this actor is crushed.")]
-		public readonly string CrushedSequence = "die-crushed";
+		[SequenceReference] public readonly string CrushedSequence;
+
 		public readonly string CrushedSequencePalette = "effect";
+
 		[Desc("Custom crushed animation palette is a player palette BaseName")]
 		public readonly bool CrushedPaletteIsPlayerPalette = false;
 

@@ -18,7 +18,7 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Position relative to body")]
 		public readonly WVec Offset = WVec.Zero;
 		public readonly int Interval = 3;
-		public readonly string Sprite = "smokey";
+		public readonly string Sprite = "smokey"; // TODO: lint check this
 		public readonly DamageState MinDamage = DamageState.Heavy;
 
 		public object Create(ActorInitializer init) { return new SmokeTrailWhenDamaged(init.Self, this); }

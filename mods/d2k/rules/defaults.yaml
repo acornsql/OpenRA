@@ -197,6 +197,7 @@
 	WithInfantryBody:
 	TakeCover:
 	WithDeathAnimation:
+		CrushedSequence: die-crushed
 	AutoTarget:
 	AttackMove:
 	Passenger:

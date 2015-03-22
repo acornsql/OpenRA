@@ -20,6 +20,8 @@ rifle:
 	TakeCover:
 	AttractsWorms:
 		Intensity: 120
+	WithInfantryBody:
+		AttackSequence: shoot
 
 engineer:
 	Inherits: ^Infantry
@@ -49,6 +51,7 @@ engineer:
 	-AutoTarget:
 	AttractsWorms:
 		Intensity: 180
+	-TakeCover:
 
 bazooka:
 	Inherits: ^Infantry
@@ -74,6 +77,8 @@ bazooka:
 	TakeCover:
 	AttractsWorms:
 		Intensity: 180
+	WithInfantryBody:
+		AttackSequence: shoot
 
 medic:
 	Inherits: ^Infantry
@@ -106,6 +111,7 @@ medic:
 	-AutoTarget:
 	AttractsWorms:
 		Intensity: 180
+	-TakeCover:
 
 fremen:
 	Inherits: ^Infantry
@@ -142,6 +148,8 @@ fremen:
 		CloakSound: STEALTH1.WAV
 		UncloakSound: STEALTH2.WAV
 	-MustBeDestroyed:
+	WithInfantryBody:
+		AttackSequence: shoot
 
 grenadier:
 	Inherits: ^Infantry
@@ -167,6 +175,7 @@ grenadier:
 	AttackFrontal:
 	TakeCover:
 	WithInfantryBody:
+		AttackSequence: throw
 		IdleSequences: idle
 	Explodes:
 		Weapon: UnitExplodeSmall
@@ -202,6 +211,8 @@ sardaukar:
 	AttackFrontal:
 	AttractsWorms:
 		Intensity: 180
+	WithInfantryBody:
+		AttackSequence: shoot
 
 saboteur:
 	Inherits: ^Infantry

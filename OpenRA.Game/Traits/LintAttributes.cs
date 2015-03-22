@@ -12,7 +12,7 @@ using System;
 
 namespace OpenRA.Traits
 {
-	/* attributes used by RALint to understand the rules */
+	/* attributes used by the linter to understand the rules */
 
 	[AttributeUsage(AttributeTargets.Field)]
 	public sealed class ActorReferenceAttribute : Attribute { }
@@ -22,4 +22,11 @@ namespace OpenRA.Traits
 
 	[AttributeUsage(AttributeTargets.Field)]
 	public sealed class VoiceReferenceAttribute : Attribute { }
+
+	[AttributeUsage(AttributeTargets.Field)]
+	public sealed class SequenceReferenceAttribute : Attribute
+	{
+		public readonly string ImageOverride;
+		public SequenceReferenceAttribute(string imageOverride = null) { ImageOverride = imageOverride; }
+	}
 }

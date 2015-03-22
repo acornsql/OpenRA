@@ -20,7 +20,7 @@ namespace OpenRA.Mods.D2k.Traits
 	public class WithDockingOverlayInfo : ITraitInfo, Requires<RenderSpritesInfo>, Requires<IBodyOrientationInfo>
 	{
 		[Desc("Sequence name to use")]
-		public readonly string Sequence = "docking-overlay";
+		[SequenceReference] public readonly string Sequence = "docking-overlay";
 
 		[Desc("Position relative to body")]
 		public readonly WVec Offset = WVec.Zero;

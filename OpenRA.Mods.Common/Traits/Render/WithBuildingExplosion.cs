@@ -19,7 +19,7 @@ namespace OpenRA.Mods.Common.Traits
 	class WithBuildingExplosionInfo : ITraitInfo, Requires<BuildingInfo>
 	{
 		[Desc("Explosion sequence name to use")]
-		public readonly string Sequence = "building";
+		[SequenceReference("explosion")] public readonly string Sequence = "building";
 
 		[Desc("Delay the explosions by this many ticks.")]
 		public readonly int Delay = 0;

@@ -13,6 +13,8 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.Common.Traits
 {
+	/* TODO: lint check those sequences */
+
 	[Desc("Can be paradropped by a ParaDrop actor.")]
 	class ParachutableInfo : ITraitInfo
 	{

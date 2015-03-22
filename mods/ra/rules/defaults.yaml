@@ -189,6 +189,7 @@
 	RenderSprites:
 	WithInfantryBody:
 	WithDeathAnimation:
+		CrushedSequence: die-crushed
 	AutoTarget:
 	AttackMove:
 	Passenger:
@@ -713,6 +714,7 @@
 	WithCrateBody:
 		Images: scrate
 		XmasImages: xcratea, xcrateb, xcratec, xcrated
+		WaterSequence: water
 	Selectable:
 		Selectable: false
 		Bounds: 15,15,-1,-1

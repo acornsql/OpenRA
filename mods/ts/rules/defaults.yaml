@@ -250,6 +250,9 @@
 	ProximityCaptor:
 		Types: CivilianInfantry
 	WithInfantryBody:
+		AttackSequence: shoot
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 	ScaredyCat:
 	-MustBeDestroyed:
 

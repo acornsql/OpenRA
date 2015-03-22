@@ -20,6 +20,7 @@ E1:
 	WithInfantryBody:
 		IdleSequences: idle1,idle2,idle3,idle4
 		StandSequences: stand, stand2
+		AttackSequence: shoot
 
 E2:
 	Inherits: ^Infantry
@@ -44,6 +45,7 @@ E2:
 		FireDelay: 15
 	AttackFrontal:
 	WithInfantryBody:
+		AttackSequence: throw
 		IdleSequences: idle1,idle2
 		StandSequences: stand, stand2
 	Explodes:
@@ -75,6 +77,7 @@ E3:
 		FireDelay: 5
 	AttackFrontal:
 	WithInfantryBody:
+		AttackSequence: shoot
 		IdleSequences: idle1,idle2
 		StandSequences: stand, stand2
 
@@ -105,6 +108,7 @@ E4:
 	WithMuzzleFlash:
 		SplitFacings: true
 	WithInfantryBody:
+		AttackSequence: shoot
 		IdleSequences: idle1,idle2
 		StandSequences: stand, stand2
 
@@ -143,6 +147,7 @@ E5:
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
 		StandSequences: stand, stand2
+		AttackSequence: shoot
 
 E6:
 	Inherits: ^Infantry
@@ -202,6 +207,7 @@ RMBO:
 		Weapon: Sniper
 	AttackFrontal:
 	WithInfantryBody:
+		AttackSequence: shoot
 		IdleSequences: idle1,idle2,idle3
 		StandSequences: stand, stand2
 	AnnounceOnBuild:

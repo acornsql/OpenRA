@@ -27,7 +27,10 @@ E1:
 	AttackFrontal:
 	TakeCover:
 	WithInfantryBody:
+		AttackSequence: shoot
 		IdleSequences: idle1,idle2
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 
 E2:
 	Inherits: ^Infantry
@@ -53,7 +56,10 @@ E2:
 	AttackFrontal:
 	TakeCover:
 	WithInfantryBody:
+		AttackSequence: throw
 		IdleSequences: idle1,idle2
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 
 E3:
 	Inherits: ^Infantry
@@ -79,7 +85,10 @@ E3:
 	AttackFrontal:
 	TakeCover:
 	WithInfantryBody:
+		AttackSequence: shoot
 		IdleSequences: idle1,idle2
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 
 WEEDGUY:
 	Inherits: ^Infantry
@@ -102,11 +111,14 @@ WEEDGUY:
 		HP: 130
 	Crushable:
 		CrushSound: squishy2.aud
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 	Armament:
 		Weapon: FireballLauncher
 		LocalOffset: 85,0,384
 	AttackFrontal:
 	WithInfantryBody:
+		AttackSequence: shoot
 	TakeCover:
 
 MEDIC:
@@ -129,6 +141,8 @@ MEDIC:
 		HP: 125
 	Crushable:
 		CrushSound: squishy2.aud
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 	Armament:
 		Weapon: Heal
 	AttackFrontal:
@@ -169,6 +183,8 @@ ENGINEER:
 		IdleSequences: idle1,idle2
 	TakeCover:
 	-GainsExperience:
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 
 UMAGON:
 	Inherits: ^Infantry
@@ -198,7 +214,10 @@ UMAGON:
 	AttackFrontal:
 	TakeCover:
 	WithInfantryBody:
+		AttackSequence: shoot
 		IdleSequences: idle1,idle2
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 
 GHOST:
 	Inherits: ^Infantry
@@ -229,11 +248,14 @@ GHOST:
 		LocalOffset: 85,0,384
 	Crushable:
 		CrushSound: squishy2.aud
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 	AttackFrontal:
 	C4Demolition:
 		C4Delay: 45
 	TakeCover:
 	WithInfantryBody:
+		AttackSequence: shoot
 		IdleSequences: idle1,idle2
 
 JUMPJET:
@@ -265,6 +287,7 @@ JUMPJET:
 	AttackFrontal:
 	TakeCover:
 	WithInfantryBody:
+		AttackSequence: shoot
 
 CHAMSPY:
 	Inherits: ^Infantry
@@ -294,7 +317,10 @@ CHAMSPY:
 	-AutoTarget:
 	-WithInfantryBody:
 	WithDisguisingInfantryBody:
+		AttackSequence: shoot
 		IdleSequences: idle1,idle2
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 
 CYBORG:
 	Inherits: ^Infantry
@@ -328,6 +354,7 @@ CYBORG:
 	TakeCover:
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
+		AttackSequence: shoot
 
 CYC2:
 	Inherits: ^Infantry
@@ -362,6 +389,7 @@ CYC2:
 	TakeCover:
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
+		AttackSequence: shoot
 
 MUTANT:
 	Inherits: ^Infantry
@@ -389,7 +417,10 @@ MUTANT:
 	AttackFrontal:
 	TakeCover:
 	WithInfantryBody:
+		AttackSequence: shoot
 		IdleSequences: idle1,idle2
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 
 MWMN:
 	Inherits: ^Infantry
@@ -417,7 +448,10 @@ MWMN:
 	AttackFrontal:
 	TakeCover:
 	WithInfantryBody:
+		AttackSequence: shoot
 		IdleSequences: idle1,idle2
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 
 MUTANT3:
 	Inherits: ^Infantry
@@ -445,7 +479,10 @@ MUTANT3:
 	AttackFrontal:
 	TakeCover:
 	WithInfantryBody:
+		AttackSequence: shoot
 		IdleSequences: idle1,idle2
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 
 MHIJACK:
 	Inherits: ^Infantry
@@ -473,6 +510,8 @@ MHIJACK:
 	TakeCover:
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 
 TRATOS:
 	Inherits: ^Infantry
@@ -498,6 +537,8 @@ TRATOS:
 	-AutoTarget:
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 
 OXANNA:
 	Inherits: ^Infantry
@@ -521,6 +562,8 @@ OXANNA:
 	-AutoTarget:
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 
 SLAV:
 	Inherits: ^Infantry
@@ -544,6 +587,8 @@ SLAV:
 	-AutoTarget:
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
 
 DOGGIE:
 	Inherits: ^Infantry
@@ -576,6 +621,10 @@ DOGGIE:
 		WanderMoveRadius: 2
 		MinMoveDelayInTicks: 25
 		MaxMoveDelayInTicks: 45
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
+	WithInfantryBody:
+		AttackSequence: shoot
 
 VISSML:
 	Inherits: ^Infantry

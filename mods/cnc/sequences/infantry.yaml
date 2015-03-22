@@ -187,7 +187,7 @@ e2:
 		Length: 6
 		Facings: 8
 		Tick: 100
-	shoot:
+	throw:
 		Start: 64
 		Length: 20
 		Facings: 8
@@ -210,7 +210,7 @@ e2:
 		Length: 4
 		Facings: 8
 		Tick: 100
-	prone-shoot:
+	prone-throw:
 		Start: 288
 		Length: 12
 		Facings: 8

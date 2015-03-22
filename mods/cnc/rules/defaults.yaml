@@ -185,6 +185,7 @@
 	RenderSprites:
 	WithInfantryBody:
 	WithDeathAnimation:
+		CrushedSequence: die-crushed
 	AttackMove:
 	Passenger:
 		CargoType: Infantry
@@ -268,6 +269,8 @@
 	ScaredyCat:
 	Crushable:
 		CrushSound: squish2.aud
+	WithInfantryBody:
+		AttackSequence: shoot
 
 ^DINO:
 	AppearsOnRadar:
@@ -302,6 +305,7 @@
 	HiddenUnderFog:
 	GivesExperience:
 	WithInfantryBody:
+		AttackSequence: attack
 	WithDeathAnimation:
 		UseDeathTypeSuffix: false
 	EditorAppearance:
@@ -456,6 +460,7 @@
 		GenericVisibility: None
 	FrozenUnderFog:
 		StartsRevealed: true
+	-WithMakeAnimation:
 
 ^CivBuildingHusk:
 	AppearsOnRadar:
@@ -472,7 +477,6 @@
 	FrozenUnderFog:
 		StartsRevealed: true
 	ScriptTriggers:
-	WithMakeAnimation:
 
 ^TechBuilding:
 	Inherits: ^CivBuilding
@@ -498,7 +502,6 @@
 		Palette: terrain
 	EditorAppearance:
 		UseTerrainPalette: true
-	WithMakeAnimation:
 
 ^CivFieldHusk:
 	AppearsOnRadar:
@@ -516,7 +519,6 @@
 	FrozenUnderFog:
 		StartsRevealed: true
 	ScriptTriggers:
-	WithMakeAnimation:
 
 ^Wall:
 	AppearsOnRadar:
@@ -572,7 +574,6 @@
 	FrozenUnderFog:
 		StartsRevealed: true
 	ScriptTriggers:
-	WithMakeAnimation:
 
 ^TibTree:
 	Tooltip:
@@ -608,7 +609,6 @@
 	FrozenUnderFog:
 		StartsRevealed: true
 	ScriptTriggers:
-	WithMakeAnimation:
 
 ^Husk:
 	Health:

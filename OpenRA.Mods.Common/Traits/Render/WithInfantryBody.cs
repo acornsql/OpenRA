@@ -20,9 +20,15 @@ namespace OpenRA.Mods.Common.Traits
 	{
 		public readonly int MinIdleWaitTicks = 30;
 		public readonly int MaxIdleWaitTicks = 110;
-		public readonly string MoveSequence = "run";
-		public readonly string AttackSequence = "shoot";
+
+		[SequenceReference] public readonly string MoveSequence = "run";
+
+		[SequenceReference] public readonly string AttackSequence;
+
+		/* [SequenceReference] TODO: lint rule does not support arrays */
 		public readonly string[] IdleSequences = { };
+
+		/* [SequenceReference] TODO: lint rule does not support arrays */
 		public readonly string[] StandSequences = { "stand" };
 
 		public virtual object Create(ActorInitializer init) { return new WithInfantryBody(init, this); }
