@@ -71,7 +71,10 @@ namespace OpenRA.Mods.Common.Orders
 
 			if (mi.Button == MouseButton.Left)
 			{
-				var topLeft = xy - FootprintUtils.AdjustForBuildingSize(buildingInfo);
+				var height = (int)world.Map.MapHeight.Value[xy.ToMPos(world.Map.TileShape)];
+				var offset = new CVec(0, height);
+				var topLeft = xy - FootprintUtils.AdjustForBuildingSize(buildingInfo) - offset;
+
 				if (!world.CanPlaceBuilding(building, buildingInfo, topLeft, null)
 					|| !buildingInfo.IsCloseEnoughToBase(world, producer.Owner, building, topLeft))
 				{

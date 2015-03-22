@@ -160,7 +160,9 @@ namespace OpenRA.Mods.Common.Traits
 			// Adds a 1-cell border around the border to cover any sprites peeking outside the map
 			foreach (var uv in CellRegion.Expand(w.Map.Cells, 1).MapCoords)
 			{
-				var screen = wr.ScreenPosition(w.Map.CenterOfCell(uv.ToCPos(map)));
+				// Shroud is always rendered at z = 0 to avoid holes
+				var pos = w.Map.CenterOfCell(uv.ToCPos(w.Map));
+				var screen = wr.ScreenPosition(pos - new WVec(0, 0, pos.Z));
 				var variant = (byte)Game.CosmeticRandom.Next(info.ShroudVariants.Length);
 				tileInfos[uv] = new TileInfo(screen, variant);
 			}
