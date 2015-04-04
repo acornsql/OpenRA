@@ -35,13 +35,14 @@ namespace OpenRA.Mods.Common.Traits
 		}
 	}
 
-	class WithProductionDoor : INotifyBuildComplete, ITick, INotifyProduction, INotifySold, ISync, INotifyDamageStateChanged
+	class WithProductionDoor : INotifyBuildComplete, ITick, INotifyProduction, INotifySold, INotifyDamageStateChanged
 	{
-		WithProductionDoorInfo info;
-		RenderSprites renderSprites;
-		Animation door;
-		[Sync] bool isOpen;
-		[Sync] CPos openExit;
+		readonly WithProductionDoorInfo info;
+		readonly RenderSprites renderSprites;
+		readonly Animation door;
+
+		bool isOpen;
+		CPos openExit;
 		bool buildComplete;
 
 		public WithProductionDoor(ActorInitializer init, WithProductionDoorInfo info)
