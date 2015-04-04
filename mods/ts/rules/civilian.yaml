@@ -1213,26 +1213,6 @@ GAOLDCC6:
 	RenderBuilding:
 		Palette: player
 
-GASPOT:
-	Inherits: ^CivBuilding
-	Tooltip:
-		Name: Light Tower
-	Building:
-		Footprint: x
-		Dimensions: 1, 1
-	Selectable:
-		Bounds: 48, 82, 0, -25
-	Power:
-		Amount: -10
-	Armor:
-		Type: wood
-	Health:
-		HP: 400
-	RenderBuilding:
-		Palette: player
-	WithIdleOverlay@LIGHTS:
-		Sequence: idle-lights
-
 GALITE:
 	Inherits: ^Building
 	Valued:
