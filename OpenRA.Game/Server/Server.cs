@@ -444,6 +444,9 @@ namespace OpenRA.Server
 		public void SendMessage(string text)
 		{
 			DispatchOrdersToClients(null, 0, new ServerOrder("Message", text).Serialize());
+
+			if (Settings.Dedicated)
+				Console.WriteLine(text);
 		}
 
 		void InterpretServerOrder(Connection conn, ServerOrder so)
