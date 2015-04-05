@@ -332,6 +332,7 @@
     <Compile Include="Traits\ParaDrop.cs" />
     <Compile Include="Traits\Passenger.cs" />
     <Compile Include="Traits\PaletteEffects\CloakPaletteEffect.cs" />
+    <Compile Include="Traits\PaletteEffects\FlashPaletteEffect.cs" />
     <Compile Include="Traits\PaletteEffects\LightPaletteRotator.cs" />
     <Compile Include="Traits\PaletteEffects\MenuPaletteEffect.cs" />
     <Compile Include="Traits\PaletteEffects\NukePaletteEffect.cs" />
@@ -420,6 +421,7 @@
     <Compile Include="Traits\Sound\AnnounceOnSeen.cs" />
     <Compile Include="Traits\Sound\DeathSounds.cs" />
     <Compile Include="Traits\Sound\SoundOnDamageTransition.cs" />
+    <Compile Include="Traits\Sound\Thunder.cs" />
     <Compile Include="Traits\SupplyTruck.cs" />
     <Compile Include="Traits\SupportPowers\AirstrikePower.cs" />
     <Compile Include="Traits\SupportPowers\GrantUpgradePower.cs" />
