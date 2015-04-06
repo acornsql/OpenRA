@@ -37,13 +37,18 @@ beacon:
 		Length: 12
 		BlendMode: Additive
 
+crate:
+	idle:
+		ShadowStart: 1
+		UseTilesetExtension: true
+
 crate-effects:
 	Defaults:
 		Length: *
 	dollar: money
 	reveal-map: reveal
 	hide-map: shroudx
-	fpower: firepowr
+	firepower: firepowr
 	armor: armor
 	stealth: cloak
 	heal: healall
