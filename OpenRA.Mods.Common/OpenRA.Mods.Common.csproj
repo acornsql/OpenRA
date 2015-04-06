@@ -621,6 +621,7 @@
     <Compile Include="Graphics\TilesetSpecificSpriteSequence.cs" />
     <Compile Include="Traits\Pluggable.cs" />
     <Compile Include="Traits\Plug.cs" />
+    <Compile Include="Traits\Buildings\Gate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
