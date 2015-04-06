@@ -365,6 +365,7 @@
     <Compile Include="Traits\ProximityCaptor.cs" />
     <Compile Include="Traits\ProximityCapturable.cs" />
     <Compile Include="Traits\RadarColorFromTerrain.cs" />
+    <Compile Include="Traits\Render\ChangeSequence.cs" />
     <Compile Include="Traits\Render\Hovers.cs" />
     <Compile Include="Traits\Render\RenderBuilding.cs" />
     <Compile Include="Traits\Render\RenderBuildingCharge.cs" />
