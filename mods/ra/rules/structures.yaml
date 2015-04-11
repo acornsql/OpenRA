@@ -563,6 +563,7 @@ HBOX:
 	Cloak:
 		InitialDelay: 125
 		CloakDelay: 60
+		Palette: alpha-cloak
 	-AcceptsSupplies:
 	Turreted:
 		ROT: 255

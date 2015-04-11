@@ -29,6 +29,12 @@ World:
 	PlayerPaletteFromCurrentTileset:
 		Name: player
 		ShadowIndex: 3,4
+	PlayerPaletteFromCurrentTileset@alpha:
+		Name: alpha-cloak
+		ShadowIndex: 3,4
+	AlphaPaletteEffect:
+		Palettes: alpha-cloak
+		Alpha: 140
 	PaletteFromCurrentTileset:
 		Name: terrain
 		ShadowIndex: 3,4
